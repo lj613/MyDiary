@@ -1,0 +1,114 @@
+{
+  "id": "1981722",
+  "name": "后台1",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1012757",
+      "name": "分享",
+      "font_class": "iconfontzhizuobiaozhun20",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "1108191",
+      "name": "wode",
+      "font_class": "jinakangbaoicons25",
+      "unicode": "e676",
+      "unicode_decimal": 58998
+    },
+    {
+      "icon_id": "1613371",
+      "name": "密码",
+      "font_class": "mima",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "2267096",
+      "name": "修改",
+      "font_class": "web-icon-",
+      "unicode": "e6e5",
+      "unicode_decimal": 59109
+    },
+    {
+      "icon_id": "2480667",
+      "name": "首页",
+      "font_class": "shouye",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "2729101",
+      "name": "下载",
+      "font_class": "xiazai",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "2767325",
+      "name": "上传",
+      "font_class": "shangchuan",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "2959100",
+      "name": "项目管理",
+      "font_class": "xiangmuguanli",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "5485649",
+      "name": "上传 (1)",
+      "font_class": "shangchuan1",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "5640058",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
+      "icon_id": "7391806",
+      "name": "用户管理",
+      "font_class": "yonghuguanli-",
+      "unicode": "e6ad",
+      "unicode_decimal": 59053
+    },
+    {
+      "icon_id": "7404517",
+      "name": "删除",
+      "font_class": "shanchu",
+      "unicode": "e785",
+      "unicode_decimal": 59269
+    },
+    {
+      "icon_id": "8940192",
+      "name": "word",
+      "font_class": "word",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "10262050",
+      "name": "设 置",
+      "font_class": "shezhi",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "14421790",
+      "name": "退出",
+      "font_class": "tuichu_huaban1",
+      "unicode": "e686",
+      "unicode_decimal": 59014
+    }
+  ]
+}
