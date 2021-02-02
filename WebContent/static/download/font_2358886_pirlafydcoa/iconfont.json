@@ -6,55 +6,6 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "10868928",
-      "name": "霾",
-      "font_class": "haze",
-      "unicode": "e608",
-      "unicode_decimal": 58888
-    },
-    {
-      "icon_id": "13768018",
-      "name": "阴天",
-      "font_class": "cloudy",
-      "unicode": "e624",
-      "unicode_decimal": 58916
-    },
-    {
-      "icon_id": "1314409",
-      "name": "雨天",
-      "font_class": "rain",
-      "unicode": "e66d",
-      "unicode_decimal": 58989
-    },
-    {
-      "icon_id": "5126358",
-      "name": "多云",
-      "font_class": "cloud",
-      "unicode": "e61b",
-      "unicode_decimal": 58907
-    },
-    {
-      "icon_id": "8937060",
-      "name": "雾",
-      "font_class": "fog",
-      "unicode": "e617",
-      "unicode_decimal": 58903
-    },
-    {
-      "icon_id": "11091467",
-      "name": "晴",
-      "font_class": "sunny",
-      "unicode": "e604",
-      "unicode_decimal": 58884
-    },
-    {
-      "icon_id": "19670908",
-      "name": "下雪",
-      "font_class": "snow",
-      "unicode": "e66e",
-      "unicode_decimal": 58990
-    },
-    {
       "icon_id": "19751507",
       "name": "下箭头",
       "font_class": "arrow-right",

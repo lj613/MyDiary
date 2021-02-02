@@ -20,9 +20,5 @@ public interface AdminDao {
 	public int edit(Admin admin); 
 	public int deleteById(Integer id);
 	public int deleteAll(String ids);
-	
-	/*public int
-	  delete(String ids); 
-	  public int getTotal(Map<String,Object> queryMap);*/
 	 
 }

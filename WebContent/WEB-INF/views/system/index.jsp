@@ -8,30 +8,31 @@
 <head>    
 <title>日记本系统</title>
 <style type="text/css">
-html {
+/* 设置固定的背景图像：    background-attachment: fixed;  	当页面的其余部分滚动时，背景图像不会移动。*/
+html,body{
     background: url(../images/snap_1537698639290.png);
+    background-repeat:no-repeat;
+     background-size:100% 100%; 
+     background-attachment: fixed; 
 }
+
 </style>
 </head>
-    <frameset rows="30,*,20" >
-          <frame name="topFrame"  src="../system/top"  scrolling="no"  />
+    <frameset rows="50,*,30" >
+          <frame noresize="noresize" name="topFrame"  src="../system/top"  scrolling="no"  />
           <!--  <frameset  id="body"> -->
           <frameset  id="body" cols="250,*"  >
-               <frame name="leftFrame" id ="leftFrame" src="../system/left" scrolling="no" />
-               <frame name="body" id="body"  src="../system/welcome"  scrolling="yes"/>
+               <frame noresize="noresize" name="leftFrame" id ="leftFrame" src="../system/left" scrolling="no" />
+               <frame noresize="noresize" name="body" id="body"  src="../system/welcome"  scrolling="yes"/>
                
               <!--   <frame name="rightFrame" src="rightFrame.html"/>  src="mainFrame.html"-->
           </frameset>
-       <!--    <frame name="bottomFrame"  src="bottomFrame.html" scrolling="yes"/> -->
+          <frame noresize="noresize" name="bottomFrame" id ="homebottom" src="../system/bottom" scrolling="no"/>
      </frameset>
      <noframes>
-<body background="tupian/homeright.jpg" style=" background-repeat:no-repeat ;
-background-size:100% 100%; 
-background-attachment: fixed;">
-        该浏览器不支持框架集！
-</body>
-      </noframes>
-
-
+		<body>
+		        该浏览器不支持框架集！
+		</body>
+     </noframes>
 
 </html>

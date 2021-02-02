@@ -20,19 +20,10 @@ public interface AdminService {
 	 
 	  public Admin findById(Integer id);
 	  
-//	  public List<User> findList(Map<String, Object> queryMap);
+      //public List<User> findList(Map<String, Object> queryMap);
 	  public int edit(Admin admin);
 	  public int deleteById(Integer id);
 	  
 	  public int deleteAll(String ids);
 	  
-	/*
-	 * public int edit(User user);
-	 * 
-	 * public int delete(String ids);
-	 * 
-	 * 
-	 * 
-	 * public int getTotal(Map<String, Object> queryMap);
-	 */
 }

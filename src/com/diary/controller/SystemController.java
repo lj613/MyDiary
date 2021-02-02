@@ -24,6 +24,7 @@ import com.diary.entity.User;
 import com.diary.service.AdminService;
 import com.diary.service.UserService;
 import com.diary.util.CpachaUtil;
+import com.diary.util.StringUtil;
 
 /**
  * 
@@ -59,7 +60,6 @@ public class SystemController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login(ModelAndView model) {
 		model.setViewName("system/login"); // 转到的视图页面的名字
-		/* model.addObject("user", "lj"); */
 		return model;
 	}
 	
@@ -91,7 +91,16 @@ public class SystemController {
 	// 后台首页顶部部分
 	@RequestMapping(value = "/top", method = RequestMethod.GET)
 	public ModelAndView top(ModelAndView model) {
+		System.out.println("top加载");
 		model.setViewName("system/top");
+		return model;
+	}
+	
+	// 后台首页底部部分
+	@RequestMapping(value = "/bottom", method = RequestMethod.GET)
+	public ModelAndView bottom(ModelAndView model) {
+		System.out.println("bottom加载");
+		model.setViewName("system/bottom");
 		return model;
 	}
 
@@ -199,43 +208,6 @@ public class SystemController {
 		return ret;
 	}
 
-	/*
-	 * @RequestMapping(value = "/login",method=RequestMethod.POST)
-	 * 
-	 * @ResponseBody public Map<String, String> login(
-	 * 
-	 * @RequestParam(value="username",required=true) String username,
-	 * 
-	 * @RequestParam(value="password",required=true) String password,
-	 * 
-	 * @RequestParam(value="vcode",required=true) String vcode,
-	 * 
-	 * @RequestParam(value="type",required=true) int type, HttpServletRequest
-	 * request ){ Map<String, String> ret = new HashMap<String, String>();
-	 * if(StringUtils.isEmpty(username)){ ret.put("type", "error"); ret.put("msg",
-	 * "用户名不能为空!"); return ret; } if(StringUtils.isEmpty(password)){ ret.put("type",
-	 * "error"); ret.put("msg", "密码不能为空!"); return ret; }
-	 * if(StringUtils.isEmpty(vcode)){ ret.put("type", "error"); ret.put("msg",
-	 * "验证码不能为空!"); return ret; } String loginCpacha =
-	 * (String)request.getSession().getAttribute("loginCpacha");
-	 * if(StringUtils.isEmpty(loginCpacha)){ ret.put("type", "error");
-	 * ret.put("msg", "长时间未操作，会话已失效，请刷新后重试!"); return ret; }
-	 * if(!vcode.toUpperCase().equals(loginCpacha.toUpperCase())){ ret.put("type",
-	 * "error"); ret.put("msg", "验证码错误!"); return ret; }
-	 * request.getSession().setAttribute("loginCpacha", null); //从数据库中去查找用户 if(type
-	 * == 1){ //管理员 User user = userService.findByUserName(username); if(user ==
-	 * null){ ret.put("type", "error"); ret.put("msg", "不存在该用户!"); return ret; }
-	 * if(!password.equals(user.getPassword())){ ret.put("type", "error");
-	 * ret.put("msg", "密码错误!"); return ret; }
-	 * request.getSession().setAttribute("user", user); } if(type == 2){ //学生
-	 * Student student = studentService.findByUserName(username); if(student ==
-	 * null){ ret.put("type", "error"); ret.put("msg", "不存在该学生!"); return ret; }
-	 * if(!password.equals(student.getPassword())){ ret.put("type", "error");
-	 * ret.put("msg", "密码错误!"); return ret; }
-	 * request.getSession().setAttribute("user", student); }
-	 * request.getSession().setAttribute("userType", type); ret.put("type",
-	 * "success"); ret.put("msg", "登录成功!"); return ret; }
-	 */
 
 	/**
 	 * 注册表单提交
@@ -294,16 +266,19 @@ public class SystemController {
 			return ret;
 		} // 清空缓存中的验证码
 		request.getSession().setAttribute("loginCpacha", null);
-		Admin existUser = adminService.findByUserName(username);
+		User existUser = userService.findByUserName(username);
 		if (existUser != null) {
 			ret.put("type", "error");
 			ret.put("msg", "该用户名已经存在!");
 			return ret;
 		}
-		Admin admin = new Admin();
-		admin.setUsername(username);
-		admin.setPassword(password);
-		if(adminService.add(admin) <= 0){
+		User user = new User();
+		user.setUn(StringUtil.generateUn("U", ""));
+		user.setSex("男");
+    	user.setPhoto("/MyDiary/upload/1612144135561.jpg");
+		user.setUsername(username);
+		user.setPassword(password);
+		if(userService.add(user) <= 0){
 			ret.put("type", "error");
 			ret.put("msg", "注册失败!");
 			return ret;
