@@ -17,6 +17,7 @@
 	href="../static/css/user/user_list.css">
 <link href="../static/css/bootstrap.min.css" rel="stylesheet">
 <link href="../static/css/bootstrapValidator.min.css" rel="stylesheet" />
+
 <script src="../static/js/jquery-3.4.1.min.js"></script>
 <script src="../static/js/bootstrap.min.js"></script>
 <script src="../static/js/bootstrapValidator.min.js"></script>
@@ -24,8 +25,9 @@
 <link rel="stylesheet" type="text/css" href="../static/css/easyui.css">
 <link rel="stylesheet" type="text/css" href="../static/css/icon.css">
 <link rel="stylesheet" type="text/css" href="../static/css/demo.css">
-<!-- <script type="text/javascript" src="../static/js/jquery.min.js"></script> -->
+
 <script type="text/javascript" src="../static/js/jquery.easyui.min.js"></script>
+<!-- <script type="text/javascript" src="../static/js/jquery.min.js"></script> -->
 <script type="text/javascript" src="../static/js/validateExtends.js"></script>
 
 <style type="text/css">
@@ -50,14 +52,13 @@
 </head>
 
 <body>
-	
-  <section id="main"> <section class="main_container">
+
+	<section id="main"> <section class="main_container">
 	<section id="projectTitle" class="clear">
 	<div class="projectTitle_text l">
 		<h2>管理员管理</h2>
 	</div>
-	</section> 
-	<section id="projectList">
+	</section> <section id="projectList">
 	<div class="projectList_cons">
 		<div class="row">
 			<div class="col-md-3">
@@ -70,19 +71,20 @@
 					<span class="glyphicon glyphicon-remove"></span> 删除
 				</button>
 			</div>
-			<!-- <div class="sp_search class="col-md-3"">
-				<input type="text" placeholder="请输入用户名" name="keywords" id="">
-				<button type="button" class="btn btn-success" id="search_btn">
-					<span class="glyphicon glyphicon-search"></span> 搜索
-				</button>
-			</div> -->
-		</div>
-		<div class="sp_search">
-				<input type="text" placeholder="请输入用户名" name="keywords" id="search_words" value="">
+			<div class="sp_search class="col-md-3"">
+				<input type="text" placeholder="请输入用户名" name="keywords"
+					id="search_words" value="">
 				<button type="button" class="btn btn-success" id="search_btn">
 					<span class="glyphicon glyphicon-search"></span> 搜索
 				</button>
 			</div>
+		</div>
+		<!-- <div class="sp_search" style="margin-top:5px">
+					<input type="text" placeholder="请输入用户名" name="keywords" id="search_words" value="">
+					<button type="button" class="btn btn-success" id="search_btn">
+						<span class="glyphicon glyphicon-search"></span> 搜索
+					</button>
+			</div> -->
 		<div class="show">
 			<table class="sp_table" id="users_table">
 				<thead>
@@ -91,7 +93,7 @@
 						<th width="300">ID</th>
 						<th width="300">用户名</th>
 						<th width="300">密码</th>
-						<th >操作</th>
+						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -100,12 +102,11 @@
 			</table>
 		</div>
 	</div>
-	</section> 
-	
-	
+	</section> </section> </section>
+
 	<!-- 添加用户模态框 -->
-	<div class="modal fade" id="addUserModal"
-		aria-labelledby="addUser1" aria-hidden="true">
+	<div class="modal fade" id="addUserModal" aria-labelledby="addUser1"
+		aria-hidden="true">
 		<div class="modal-dialog ">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -145,9 +146,10 @@
 		</div>
 	</div>
 
+
 	<!--修改用户模态框 -->
-	<div class="modal fade" id="editUserModal"
-		aria-labelledby="editUser1" aria-hidden="true">
+	<div class="modal fade" id="editUserModal" aria-labelledby="editUser1"
+		aria-hidden="true">
 		<div class="modal-dialog ">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -186,7 +188,6 @@
 			</div>
 		</div>
 	</div>
-	</section> </section>
 
 	<div class="sp_footer">
 		<div class="row">
@@ -201,50 +202,13 @@
 
 	<script type="text/javascript">
 		//全局变量 保存表格中数据的总记录数,当前页数
-		var totalRecord,currentPage;
+		var totalRecord, currentPage;
 		//记录弹出模态框的index
 		var index = 1051;
 		var valiFlag;
 		$(function() {
 			/* 页面加载完成后，直接发送一个ajax请求 获取分页数据  显示数据列表的首页*/
 			to_page(1);
-
-			//添加用户表单验证
-			/* $('.addForm').bootstrapValidator({
-				message : 'This value is not valid',
-				feedbackIcons : {
-					valid : 'glyphicon glyphicon-ok',
-					invalid : 'glyphicon glyphicon-remove',
-					validating : 'glyphicon glyphicon-refresh'
-				},
-				fields : {
-					username : {
-						message : '用户名验证失败',
-						validators : {
-							notEmpty : {
-								message : '用户名不能为空'
-							},
-							stringLength : {
-								min : 2,
-								max : 12,
-								message : '用户名由2-12位字符组成'
-							},
-						}
-					},
-					password : {
-						validators : {
-							notEmpty : {
-								message : '密码不能为空'
-							},
-							stringLength : {
-								min : 6,
-								max : 18,
-								message : '密码长度必须在6到18位之间'
-							},
-						}
-					}
-				}
-			}); */
 		});
 
 		//页面跳转
@@ -263,7 +227,7 @@
 					build_page_nav(result);
 				}
 			})
-			$("#check_all").prop("checked",false);
+			$("#check_all").prop("checked", false);
 		}
 
 		//1.解析并显示用户数据方法	用户数据表格
@@ -271,32 +235,47 @@
 			//清除原来的数据
 			$("#users_table tbody").empty();
 			var users = result.datalist.pageInfo.list;
-			$.each(users, function(index, user) {
-				/* var checkboxTd = $("<td></td>").append(
-						$("<input>").attr("type", "checkbox")); */
-				/* var checkboxTd = $("<td></td>").append($("<input type='checkbox' class='check_item'/>")); */
-				var checkboxTd = $("<td><input type='checkbox' class='check_item'/></td>");
-				var userIdTd = $("<td></td>").append(user.id);
-				var usernameTd = $("<td></td>").append(user.username);
-				var passwordTd = $("<td></td>").append(user.password);
+			$
+					.each(
+							users,
+							function(index, user) {
+								/* var checkboxTd = $("<td></td>").append(
+										$("<input>").attr("type", "checkbox")); */
+								/* var checkboxTd = $("<td></td>").append($("<input type='checkbox' class='check_item'/>")); */
+								var checkboxTd = $("<td><input type='checkbox' class='check_item'/></td>");
+								var userIdTd = $("<td></td>").append(user.id);
+								var usernameTd = $("<td></td>").append(
+										user.username);
+								var passwordTd = $("<td></td>").append(
+										user.password);
 
-				var editBtn = $("<button></button>").addClass(
-						"btn btn-success btn-sm edit_btn").append(
-						$("<span></span>").addClass(
-								"glyphicon glyphicon-pencil ")).append("编辑");
-				//为编辑按钮添加一个自定义属性，表示当前编辑的管理员id
-				editBtn.attr("edit-id",user.id);
-				var delBtn = $("<button></button>").addClass(
-						"btn btn-danger btn-sm delete_btn").append(
-						$("<span></span>").addClass(
-								"glyphicon glyphicon-remove")).append("删除");
-				//为删除按钮添加一个自定义属性，表示当前删除管理员id
-				delBtn.attr("del-id",user.id);
-				var btnTd = $("<td></td>").append(editBtn).append(delBtn);
-				$("<tr></tr>").append(checkboxTd).append(userIdTd).append(
-						usernameTd).append(passwordTd).append(btnTd).appendTo(
-						"#users_table tbody");
-			})
+								var editBtn = $("<button></button>")
+										.addClass(
+												"btn btn-success btn-sm edit_btn")
+										.append(
+												$("<span></span>")
+														.addClass(
+																"glyphicon glyphicon-pencil "))
+										.append("编辑");
+								//为编辑按钮添加一个自定义属性，表示当前编辑的管理员id
+								editBtn.attr("edit-id", user.id);
+								var delBtn = $("<button></button>")
+										.addClass(
+												"btn btn-danger btn-sm delete_btn")
+										.append(
+												$("<span></span>")
+														.addClass(
+																"glyphicon glyphicon-remove"))
+										.append("删除");
+								//为删除按钮添加一个自定义属性，表示当前删除管理员id
+								delBtn.attr("del-id", user.id);
+								var btnTd = $("<td></td>").append(editBtn)
+										.append(delBtn);
+								$("<tr></tr>").append(checkboxTd).append(
+										userIdTd).append(usernameTd).append(
+										passwordTd).append(btnTd).appendTo(
+										"#users_table tbody");
+							})
 		}
 		//2.解析显示分页信息
 		function build_page_info(result) {
@@ -390,17 +369,16 @@
 			$(ele).find("*").removeClass("has-error has-success");
 			$(ele).find(".help-block").text("");
 		}
-        
+
 		//改变弹出模态框的index 避免模态框被另一个模态框覆盖
-		function changeIndex(obj){
-			
+		function changeIndex(obj) {
+
 			var k = obj.getAttribute("data-target");
-			$(k).css("z-index",index);
+			$(k).css("z-index", index);
 			index++;
 			alert("当前模态框的index：" + index);
 		}
-		
-		
+
 		//点击添加弹出新增模态框  手动打开模态框
 		$("#user_add_btn").click(function() {
 			changeIndex(this);
@@ -446,7 +424,7 @@
 										"has-success");
 								$("#username_add_input").next("span").text("");
 							}
-							
+
 							return valiFlag;
 						});
 		//密码校验(失去焦点时触发)
@@ -473,13 +451,9 @@
 										"has-success");
 								$("#password_add_input").next("span").text("");
 							}
-							
+
 							return valiFlag;
 						});
-		/* //检查用户名是否已存在
-		$("#username_add_input").change(function(){
-			//发送ajax请求校验用户名
-		}); */
 
 		//提交新增用户模态框的信息 保存用户信息
 		$("#user_save_btn").click(
@@ -491,8 +465,8 @@
 					} */
 					//校验不通过则不执行ajax请求
 					if (!valiFlag) {
-						show_validate_msg("#username_add_input",
-								"error", "用户名不能为空");
+						show_validate_msg("#username_add_input", "error",
+								"用户名不能为空");
 						return false;
 						return false;
 					}
@@ -527,190 +501,197 @@
 					});
 
 				});
-		
-		 //给删除按钮绑定弹出删除对话框事件 (单个删除)
-		$(document).on("click",".delete_btn",function(){
+
+		//给删除按钮绑定弹出删除对话框事件 (单个删除)
+		$(document).on("click", ".delete_btn", function() {
 			//1.弹出是否确认删除对话框
 			var username = $(this).parents("tr").find("td:eq(2)").text(); //要删除的管理员的名字
 			var id = $(this).attr("del-id");
 			/* alert($(this).parents("tr").find("td:eq(2)").text()); */
-			if(confirm("确认删除【"+ username +"】吗？")){
+			if (confirm("确认删除【" + username + "】吗？")) {
 				//确认，发送ajax请求删除
 				$.ajax({
-					url:"${APP_PATH}/admin/delete/"+ id,
+					url : "${APP_PATH}/admin/delete/" + id,
 					/* url:"${APP_PATH}/admin/edit/"+$(this).attr("edit-id"),  */
-					type:"POST",
-					success:function(result){
+					type : "POST",
+					success : function(result) {
 						if (result.code == 100) {
 							alert(result.msg);
-							
-						}
-						else if(result.code == 200){
+
+						} else if (result.code == 200) {
 							alert(result.msg);
 						}
 						//回到删除数据所在页
 						to_page(currentPage);
-						
+
 					}
 				});
 			}
-			
+
 			/* $("#editUserModal").modal({
 				  backdrop:"static"
 			  }) */
 		});
-		
+
 		//实现全选，全不选功能
-		$("#check_all").click(function(){
+		$("#check_all").click(function() {
 			//通过prop获取  attr获取自定义属性的值     获取全选全部选框的当前状态  
 			/* alert($(this).prop("checked")); */
 			//将下面的子项的状态改为和它一致的状态
-			$(".check_item").prop("checked",$(this).prop("checked"));
+			$(".check_item").prop("checked", $(this).prop("checked"));
 		})
-		
-		//给每一个check_item绑定事件
-		$(document).on("click",".check_item",function(){
-			//判断当前页的checkbox是否都选中
-			/* alert($(".check_item:checked").length); */
-			 var flag = $(".check_item:checked").length == $(".check_item").length;
-			$("#check_all").prop("checked",flag);
-		});
-		
-		//点击全部删除，实现删除选中的所有
-		$("#user_delete_all_btn").click(function(){
-			//要删除的所有用户id的组合
-		   var del_idstr = "";
-			$.each($(".check_item:checked"),function(){
-				//组装用户id字符串
-				del_idstr += $(this).parents("tr").find("td:eq(1)").text()+"-";
-			});
-			//去除最后一个“-”符号
-			del_idstr = del_idstr.substring(0,del_idstr.length-1);
-		   if(  confirm("确认删除所有选中的用户吗？")){
-			   //发送ajax请求删除所有选中的用户
-			   $.ajax({
-				   url:"${APP_PATH}/admin/delete/"+ del_idstr,
-				   type:"POST",
-				   success:function(result){
-					   alert(result.msg);
-					   //回到当前页面
-					   to_page(currentPage);
-				   }
-			   })
-		   }
-		});
-		
-		
-		  //给修改按钮绑定修改模态框弹出事件
-		  $(document).on("click",".edit_btn",function(){
-			  changeIndex(this);
-			  //alert("edit");
-			  //1.查出并显示对应用户信息
-			  getAdmin($(this).attr("edit-id"));
-			  //2.把管理员id传给修改模态框的更新按钮
-			  $("#user_update_btn").attr("edit-id",$(this).attr("edit-id"));
-			  $("#editUserModal").modal({
-				  backdrop:"static"
-			  })
-		  });
-		  
-		 /*  $(document).on("click","#search_btn",function(){
-			 
-			  var keywords = $("#search_words").val();
-			  alert("点击了搜索按钮,keywords为：" + keywords);
-		  }) */
-		  
-		  //搜索用户 模糊查询
-		  $("#search_btn").click(function(){
-			  var keywords = $("#search_words").val();
-			/*   alert("点击了搜索按钮,keywords为：" + keywords); */
-			  $.ajax({
-				  url:"${APP_PATH}/admin/search/" + keywords,
-				  type:"GET",
-				  success:function(result){
-					  /*  console.log(result);  //打印后台返回的数据 */
-						//1.解析并显示用户数据
-						build_users_table(result);
-						//2.解析并显示分页信息
-						build_page_info(result);
-						//3.解析并显示分页条
-						build_page_nav(result);
-				  }
-				  
-			  })
-		  }) 
-		  
-		  
-		  //根据id查询用户信息
-		  function getAdmin(id){
-			  $.ajax({
-				  url:"${APP_PATH}/admin/" + id,
-				  type:"GET",
-				  success:function(result){
-					  console.log(result);
-					  //获取查询到的管理员数据
-					  var admin = result.datalist.admin;
-					  //将查询到的数据填充到对应位置
-					  $("#username_edit_input").val(admin.username);
-					  $("#password_edit_input").val(admin.password);
-				  }
-			  });
-		  }
-		  //点击更新 更新管理员信息
-		  $('#user_update_btn').click(function(){
-			    //用户名校验
-				var username = $("#username_edit_input").val();
-				var regName = /(^[a-zA-Z0-9_-]{5,16}$)|(^[\u2E80-\u9FFF]{2,5})/; //中文2-5个
-				if (!regName.test(username)) {
-					/* alert("用户名可以是2-5位中文或者6-16位英文和数字，下划线，中划线的组合"); */
-					show_validate_msg("#username_edit_input",
-							"error",
-							"用户名可以是2-5位中文或者5-16位英文和数字，下划线，中划线的组合");
-				} else {
-					show_validate_msg("#username_edit_input",
-							"success", "");
-					$("#username_edit_input").parent().addClass(
-							"has-success");
-					$("#username_edit_input").next("span").text("");
-				}
-				
-				//密码校验
-				var password = $("#password_add_input").val();
-				var regPassword = /^[a-zA-Z0-9_-]{5,18}$/;
-				if (!regPassword.test(password)) {
-					valiFlag = false;
-					/* alert("密码为6-18位字母数字下划线中划线的组合"); */
-					//清空这个元素之前的样式
-					show_validate_msg("#password_add_input",
-							"error", "密码为5-18位字母数字下划线中划线的组合");
-					/*  $("#password_add_input").parent().addClass("has-error");
-					$("#password_add_input").next("span").text("密码为6-18位字母数字下划线中划线的组合"); */
 
-				} else {
-					valiFlag = true;
-					show_validate_msg("#password_add_input",
-							"success", "");
-					$("#password_add_input").parent().addClass(
-							"has-success");
-					$("#password_add_input").next("span").text("");
+		//给每一个check_item绑定事件
+		$(document)
+				.on(
+						"click",
+						".check_item",
+						function() {
+							//判断当前页的checkbox是否都选中
+							/* alert($(".check_item:checked").length); */
+							var flag = $(".check_item:checked").length == $(".check_item").length;
+							$("#check_all").prop("checked", flag);
+						});
+
+		//点击全部删除，实现删除选中的所有
+		$("#user_delete_all_btn").click(
+				function() {
+					//要删除的所有用户id的组合
+					var del_idstr = "";
+					$.each($(".check_item:checked"), function() {
+						//组装用户id字符串
+						del_idstr += $(this).parents("tr").find("td:eq(1)")
+								.text()
+								+ "-";
+					});
+					//去除最后一个“-”符号
+					del_idstr = del_idstr.substring(0, del_idstr.length - 1);
+					if (confirm("确认删除所有选中的用户吗？")) {
+						//发送ajax请求删除所有选中的用户
+						$.ajax({
+							url : "${APP_PATH}/admin/delete/" + del_idstr,
+							type : "POST",
+							success : function(result) {
+								alert(result.msg);
+								//回到当前页面
+								to_page(currentPage);
+							}
+						})
+					}
+				});
+
+		//给修改按钮绑定修改模态框弹出事件
+		$(document).on("click", ".edit_btn", function() {
+			changeIndex(this);
+			//alert("edit");
+			//1.查出并显示对应用户信息
+			getAdmin($(this).attr("edit-id"));
+			//2.把管理员id传给修改模态框的更新按钮
+			$("#user_update_btn").attr("edit-id", $(this).attr("edit-id"));
+			$("#editUserModal").modal({
+				backdrop : "static"
+			})
+		});
+
+		/*  $(document).on("click","#search_btn",function(){
+		 
+		  var keywords = $("#search_words").val();
+		  alert("点击了搜索按钮,keywords为：" + keywords);
+		 }) */
+
+		//搜索用户 模糊查询
+		$("#search_btn").click(function() {
+			var keywords = $("#search_words").val();
+			/*   alert("点击了搜索按钮,keywords为：" + keywords); */
+			$.ajax({
+				url : "${APP_PATH}/admin/search/" + keywords,
+				type : "GET",
+				success : function(result) {
+					/*  console.log(result);  //打印后台返回的数据 */
+					//1.解析并显示用户数据
+					build_users_table(result);
+					//2.解析并显示分页信息
+					build_page_info(result);
+					//3.解析并显示分页条
+					build_page_nav(result);
 				}
-				
-				//发送ajax请求  保存更新的管理员数据
-				$.ajax({
-					/* url:"${APP_PATH}/admin/edit", */
-						url:"${APP_PATH}/admin/edit/"+$(this).attr("edit-id"), 
-						type:"POST",
-						data:$("#editUserModal .editForm").serialize(),
-						success:function(result){
-							//alert(result.msg);
-							//1.更新成功关闭修改模态框
-							$("#editUserModal").modal('hide');
-							//2.跳转到修改的数据所在的页面
-							to_page(currentPage);
-						}
-				})
-				
-		  })
+
+			})
+		})
+
+		//根据id查询用户信息
+		function getAdmin(id) {
+			$.ajax({
+				url : "${APP_PATH}/admin/" + id,
+				type : "GET",
+				success : function(result) {
+					console.log(result);
+					//获取查询到的管理员数据
+					var admin = result.datalist.admin;
+					//将查询到的数据填充到对应位置
+					$("#username_edit_input").val(admin.username);
+					$("#password_edit_input").val(admin.password);
+				}
+			});
+		}
+		//点击更新 更新管理员信息
+		$('#user_update_btn').click(
+						function() {
+							//用户名校验
+							var username = $("#username_edit_input").val();
+							var regName = /(^[a-zA-Z0-9_-]{5,16}$)|(^[\u2E80-\u9FFF]{2,5})/; //中文2-5个
+							if (!regName.test(username)) {
+								/* alert("用户名可以是2-5位中文或者6-16位英文和数字，下划线，中划线的组合"); */
+								show_validate_msg("#username_edit_input",
+										"error",
+										"用户名可以是2-5位中文或者5-16位英文和数字，下划线，中划线的组合");
+							} else {
+								show_validate_msg("#username_edit_input",
+										"success", "");
+								$("#username_edit_input").parent().addClass(
+										"has-success");
+								$("#username_edit_input").next("span").text("");
+							}
+
+							//密码校验
+							var password = $("#password_add_input").val();
+							var regPassword = /^[a-zA-Z0-9_-]{5,18}$/;
+							if (!regPassword.test(password)) {
+								valiFlag = false;
+								/* alert("密码为6-18位字母数字下划线中划线的组合"); */
+								//清空这个元素之前的样式
+								show_validate_msg("#password_add_input",
+										"error", "密码为5-18位字母数字下划线中划线的组合");
+								/*  $("#password_add_input").parent().addClass("has-error");
+								$("#password_add_input").next("span").text("密码为6-18位字母数字下划线中划线的组合"); */
+
+							} else {
+								valiFlag = true;
+								show_validate_msg("#password_add_input",
+										"success", "");
+								$("#password_add_input").parent().addClass(
+										"has-success");
+								$("#password_add_input").next("span").text("");
+							}
+
+							//发送ajax请求  保存更新的管理员数据
+							$.ajax({
+								/* url:"${APP_PATH}/admin/edit", */
+								url : "${APP_PATH}/admin/edit/"
+										+ $(this).attr("edit-id"),
+								type : "POST",
+								data : $("#editUserModal .editForm")
+										.serialize(),
+								success : function(result) {
+									//alert(result.msg);
+									//1.更新成功关闭修改模态框
+									$("#editUserModal").modal('hide');
+									//2.跳转到修改的数据所在的页面
+									to_page(currentPage);
+								}
+							})
+
+						})
 	</script>
 </body>
 

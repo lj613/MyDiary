@@ -153,15 +153,6 @@
 			//登录
 			$("#loginBtn").click(function () {
 				
-				/* if ($("#radio-2").attr("checked") && "${systemInfo.forbidStudent}" == 1) {
-					$.messager.alert("消息提醒", "学生暂不能登录系统！", "warning");
-					return;
-				}
-				if ($("#radio-3").attr("checked") && "${systemInfo.forbidTeacher}" == 1) {
-					$.messager.alert("消息提醒", "教师暂不能登录系统！", "warning");
-					return;
-				}
-				*/
 				var data = $("#form").serialize();
 				$.ajax({
 					type: "post",
@@ -177,23 +168,6 @@
 							$("#vcodeImg").click(); //切换验证码
 							$("input[name='vcode']").val(""); //清空验证码输入框
 						}
-						
-					/* 	if ("vcodeError" == data) {
-							$.messager.alert("消息提醒", "验证码错误!", "warning");
-							$("#vcodeImg").click(); //切换验证码
-							$("input[name='vcode']").val(""); //清空验证码输入框
-						} else if ("loginError" == msg) {
-							$.messager.alert("消息提醒", "用户名或密码错误!", "warning");
-							$("#vcodeImg").click(); //切换验证码
-							$("input[name='vcode']").val(""); //清空验证码输入框
-						} else if ("admin" == msg) {
-							window.location.href = "SystemServlet?method=toAdminView";
-						} else if ("student" == msg) {
-							window.location.href = "SystemServlet?method=toStudentView";
-						} else if ("teacher" == msg) {
-							window.location.href = "SystemServlet?method=toTeacherView";
-						} */
-						
 					}
 
 				});

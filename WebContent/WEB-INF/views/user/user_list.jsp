@@ -73,7 +73,7 @@
 			</div>
 		  </c:if>
 		</div>
-		<div class="sp_search">
+		<div class="sp_search" style="margin-top:5px">
 			<input type="text" placeholder="请输入用户名" name="keywords"
 				id="search_words" value="">
 			<button type="button" class="btn btn-success" id="search_btn">
@@ -284,48 +284,6 @@
 				</div>
 			</div>
 		</div>
-	
-		
-	<!-- 	
-		<div class="modal-dialog ">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">修改管理员</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal editForm">
-						<div class="form-group">
-							<label for="username_edit_input" class="col-sm-2 control-label">用户名:</label>
-							<div class="col-sm-7">
-								 name 与实体类中的名字一致
-								<input type="text" class="form-control" id="username_edit_input"
-									name="username" placeholder="请输入用户名"> <span
-									class="help-block"></span>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="password_edit_input" class="col-sm-2 control-label">密码:</label>
-							<div class="col-sm-7">
-								<input type="password" class="form-control"
-									id="password_edit_input" name="password" placeholder="请输入密码">
-								<span class="help-block"></span>
-							</div>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" id="user_update_btn">更新</button>
-				</div>
-			</div>
-		</div>
-	 -->
-	
 	</div>
 	
  </section> 
@@ -342,8 +300,6 @@
 		</div>
 	</div>
 	<!-- 提交表单处理iframe框架 -->
-	<!-- <iframe id="photo_target" name="photo_target" onload="uploaded(this)"
-		style="display: none" ></iframe> -->
 <iframe id="photo_target" name="photo_target" onload="uploaded(this)" style="display: none" ></iframe>    
 
 	<script type="text/javascript">
@@ -381,10 +337,10 @@
 			//清除原来的数据
 			$("#users_table tbody").empty();
 			var users = result.datalist.pageInfo.list;
-			 alert("users列表:"+users);
+			 /* alert("users列表:"+users); */
 			$.each(users,
 							function(index, user) {
-				                alert("每一个user:"+ user + user.id);
+				               /*  alert("每一个user:"+ user + user.id); */
 								var checkboxTd = $("<td><input type='checkbox' class='check_item'/></td>");
 								var userIdTd = $("<td></td>").append(user.id);
 								var usernameTd = $("<td></td>").append(
@@ -639,7 +595,7 @@
 			console.log("修改窗口密码框失去焦点")
 			//密码校验
 			var password = $(ele).val();
-			alert(password);
+			/* alert(password); */
 			var regPassword = /^[a-zA-Z0-9_-]{5,18}$/;
 			if (!regPassword.test(password)) {
 				valiFlag = false;
@@ -806,16 +762,12 @@
 		})
 
 		//给每一个check_item绑定事件
-		$(document)
-				.on(
-						"click",
-						".check_item",
-						function() {
-							//判断当前页的checkbox是否都选中
-							/* alert($(".check_item:checked").length); */
-							var flag = $(".check_item:checked").length == $(".check_item").length;
-							$("#check_all").prop("checked", flag);
-						});
+		$(document).on("click",".check_item",function() {
+			//判断当前页的checkbox是否都选中
+			/* alert($(".check_item:checked").length); */
+			var flag = $(".check_item:checked").length == $(".check_item").length;
+			$("#check_all").prop("checked", flag);
+		});
 
 		//点击全部删除，实现删除选中的所有
 		$("#user_delete_all_btn").click(
@@ -988,7 +940,7 @@
 				return;
 			data = JSON.parse(data);
 			if (data.code == 100) {
-				//上传成功
+				//上传成功 
 				if (data.datalist.successMsg != null) {
 					show_validate_msg("#photo-upload-btn", "success",
 							data.datalist.successMsg);
@@ -1006,7 +958,6 @@
 			}
 		}
 	</script>
-
 
 </body>
 
