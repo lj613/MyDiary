@@ -93,7 +93,7 @@
 						<th width="300">ID</th>
 						<th width="300">用户名</th>
 						<th width="300">密码</th>
-						<th>操作</th>
+						<th style="min-width: 190px">操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -123,7 +123,7 @@
 							<div class="col-sm-7">
 								<!--  name 与实体类中的名字一致 -->
 								<input type="text" class="form-control" id="username_add_input"
-									name="username" placeholder="请输入用户名"> <span
+									name="username" placeholder="请输入用户名" autoComplete="off"> <span
 									class="help-block"></span>
 							</div>
 						</div>

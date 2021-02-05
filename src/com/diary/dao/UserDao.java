@@ -20,5 +20,6 @@ public interface UserDao {
 	public int edit(User user); 
 	public int deleteById(Integer id);
 	public int deleteAll(String ids);
+	public int getNumBySex(String sex);
 	 
 }

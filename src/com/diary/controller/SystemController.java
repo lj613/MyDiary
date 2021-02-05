@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.diary.entity.Admin;
+import com.diary.entity.DiaryType;
 import com.diary.entity.User;
 import com.diary.service.AdminService;
+import com.diary.service.DiaryTypeService;
 import com.diary.service.UserService;
 import com.diary.util.CpachaUtil;
 import com.diary.util.StringUtil;
@@ -39,6 +41,9 @@ public class SystemController {
 	private AdminService adminService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private DiaryTypeService diaryTypeService;
+	
 
 	// 后台首页
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
@@ -104,13 +109,19 @@ public class SystemController {
 		return model;
 	}
 
-	// 后台首页欢迎页面部分
-	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
-	public ModelAndView welcome(ModelAndView model) {
-		model.setViewName("system/welcome");
+	// 普通用户登陆后台首页欢迎页面部分
+	@RequestMapping(value = "/welcome2", method = RequestMethod.GET)
+	public ModelAndView UserWelcome(ModelAndView model) {
+		model.setViewName("system/user_welcome");
 		return model;
 	}
-
+	// 管理员登陆后台首页欢迎页面部分
+	@RequestMapping(value = "/welcome1", method = RequestMethod.GET)
+	public ModelAndView AdminWelcome(ModelAndView model) {
+		model.setViewName("system/admin_welcome");
+		return model;
+	}
+	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public ModelAndView admin(ModelAndView model) {
 		model.setViewName("system/index"); // 转到的视图页面的名字
@@ -164,6 +175,9 @@ public class SystemController {
 			System.out.println("管理员登陆");
 			// 管理员登陆
 			Admin admin = adminService.findByUserName(username);
+			Integer maleNum = userService.getNumBySex("男");
+			Integer femaleNum = userService.getNumBySex("女");
+			System.out.println("男生数量：" +maleNum + "女生数量" + femaleNum);
 		    System.out.println(admin);
 			if (admin == null) {
 				ret.put("type", "error");
@@ -177,7 +191,8 @@ public class SystemController {
 			}
 			System.out.println("查询到的admin:" + admin);
 			request.getSession().setAttribute("user", admin);
-			
+			request.getSession().setAttribute("maleNum", maleNum);
+			request.getSession().setAttribute("femaleNum", femaleNum);
 			System.out.println(admin.getPassword());
 			Object user2 = request.getSession().getAttribute("user");
 			System.out.println("从缓存中获取的user:"+ user2);
@@ -186,6 +201,7 @@ public class SystemController {
 			// 普通用户登陆
 			System.out.println("普通用户登陆，用户名为:" + username);
 			User user = userService.findByUserName(username);
+			Integer diaryTypeNum = diaryTypeService.getTotalNum();
 			System.out.println("普通用户");
 			  System.out.println(user);
 				if (user == null) {
@@ -200,6 +216,7 @@ public class SystemController {
 				}
 				System.out.println("查询到的admin:" + user);
 				request.getSession().setAttribute("user", user);
+				request.getSession().setAttribute("diaryTypeNum", diaryTypeNum);
 		}
 		//保存用户类型
 		request.getSession().setAttribute("userType",type);

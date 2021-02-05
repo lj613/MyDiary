@@ -11,8 +11,7 @@
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
-<%-- 使用如：
-<link rel="stylesheet" type="text/css"  href="${APP_PATH}/static/css/user/user_list.css"> --%>
+
 <link rel="stylesheet" type="text/css"
 	href="../static/css/user/user_list.css">
 <link href="../static/css/bootstrap.min.css" rel="stylesheet">
@@ -29,6 +28,13 @@
 <script type="text/javascript" src="../static/js/validateExtends.js"></script>
 
 <style type="text/css">
+html {
+	
+}
+/* body{
+  position:absolute;
+  z-index:2000;
+} */
 /* 模态框居中样式 */
 .modal {
 	display: table;
@@ -40,11 +46,6 @@
 .modal-dialog {
 	display: table-cell;
 	vertical-align: middle;
-}
-
-/*  控制校验时右侧的图标位置 */
-.form-control-feedback {
-	right: 16px;
 }
 </style>
 </head>
@@ -59,21 +60,21 @@
 	</section> <section id="projectList">
 	<div class="projectList_cons">
 		<div class="row">
-		 <c:if test="${userType == 1}">
-			<div class="col-md-3">
-				<button type="button" class="btn btn-success" data-toggle="modal"
-					id="user_add_btn">
-					<span class="glyphicon glyphicon-plus"></span> 添加
-				</button>
+			<c:if test="${userType == 1}">
+				<div class="col-md-3">
+					<button type="button" class="btn btn-success" data-toggle="modal"
+						id="user_add_btn">
+						<span class="glyphicon glyphicon-plus"></span> 添加
+					</button>
 
-				<button type="button" class="btn btn-danger" data-toggle="modal"
-					id="user_delete_all_btn">
-					<span class="glyphicon glyphicon-remove"></span> 删除
-				</button>
-			</div>
-		  </c:if>
+					<button type="button" class="btn btn-danger" data-toggle="modal"
+						id="user_delete_all_btn">
+						<span class="glyphicon glyphicon-remove"></span> 删除
+					</button>
+				</div>
+			</c:if>
 		</div>
-		<div class="sp_search" style="margin-top:5px">
+		<div class="sp_search" style="margin-top: 5px">
 			<input type="text" placeholder="请输入用户名" name="keywords"
 				id="search_words" value="">
 			<button type="button" class="btn btn-success" id="search_btn">
@@ -89,10 +90,10 @@
 						<th width="120">用户名</th>
 						<th width="110">用户头像</th>
 						<th width="150">用户编号</th>
-	                    <th width="100">密码</th>
+						<th width="100">密码</th>
 						<th width="80">性别</th>
-						<th style="max-width:200px,width:200px">个性签名</th>
-						<th>操作</th>
+						<th style="max-width: 200px, width:200px">个性签名</th>
+						<th style="min-width: 190px">操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -101,193 +102,194 @@
 			</table>
 		</div>
 	</div>
-	</section> <!-- 添加用户模态框 -->
-	<div class="modal fade" id="addUserModal" aria-labelledby="addUser1"
-		aria-hidden="true">
-		<div class="modal-dialog ">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">添加用户</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal" id="photoForm" method="post"
-						enctype="multipart/form-data" action="upload_photo"
-						target="photo_target">
-
-						<div class="form-group">
-							<label for="photo-preview" class="col-sm-2 control-label">预览头像:</label>
-							<img class="col-sm-10" id="photo-preview" alt="照片"
-								style="max-width: 100px; max-height: 100px;" title="照片"
-								src="/MyDiary/photo/user.jpg" />
-						</div>
-						<div class="form-group row">
-							<label for="add-upload-photo" class="col-sm-2 control-label">用户头像:</label>
-							<div class="col-sm-10">
-								<input type="file" id="add-upload-photo" name="photo"
-									style="display: inline-block">
-								<!-- <p class="help-block">Example block-level help text here.</p> -->
-								<button id="photo-upload-btn" class="btn btn-success btn-sm">上传图片</button>
-								<span class="help-block"></span>
-							</div>
-						</div>
-					</form>
-					<form class="form-horizontal addForm">
-						<!--  隐藏域  在页面存储但不需要显示出来的值 -->
-						<div class="form-group">
-							<input id="add_photo" type="hidden" name="photo"
-								value="/MyDiary/photo/user.jpg" />
-						</div>
-
-						<div class="form-group">
-							<label for="username_add_input" class="col-sm-2 control-label">用户名:</label>
-							<div class="col-sm-7">
-								<!--  name 与实体类中的名字一致 -->
-								<input type="text" class="form-control" id="username_add_input"
-									name="username" placeholder="请输入用户名"> <span
-									class="help-block"></span>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="password_add_input" class="col-sm-2 control-label">密码:</label>
-							<div class="col-sm-7">
-								<input type="password" class="form-control"
-									id="password_add_input" name="password" placeholder="请输入密码">
-								<span class="help-block"></span>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="sex_add_input" class="col-sm-2 control-label">性别:</label>
-							<div class="col-sm-7">
-								<label class="radio-inline"> <input type="radio"
-									name="sex" id="sex1_add" value="男" checked>男
-								</label> <label class="radio-inline"> <input type="radio"
-									name="sex" id="sex2_add" value="女">女
-								</label>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="signature_add" class="col-sm-2 control-label">个性签名:</label>
-							<div class="col-sm-7">
-								<input type="text" class="form-control" id="signature_add"
-									name="signature" placeholder="请输入个性签名" style="height: 130px;">
-								<!-- <textarea rows="10" cols="20"></textarea> -->
-							</div>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" id="user_save_btn">保存</button>
-				</div>
-			</div>
-		</div>
+	</section> 
 	
-	</div>
+	<!--修改用户模态框 -->
+	<div>
+		<div class="modal fade" id="editUserModal" aria-labelledby="editUser1"
+			aria-hidden="true">
+			<div class="modal-dialog ">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">修改用户</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" id="editPhotoForm" method="post"
+							enctype="multipart/form-data" action="upload_photo"
+							target="photo_target">
 
-	<!--修改用户模态框 --> 
-	<div class="modal fade" id="editUserModal" aria-labelledby="editUser1"
-		aria-hidden="true">
-		<div class="modal-dialog ">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">修改用户</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal" id="editPhotoForm" method="post"
-						enctype="multipart/form-data" action="upload_photo"
-						target="photo_target">
+							<div class="form-group">
+								<label for="edit_photo-preview" class="col-sm-2 control-label">预览头像:</label>
+								<img class="col-sm-10" id="edit_photo-preview" alt="照片"
+									style="max-width: 100px; max-height: 100px;" title="照片"
+									src="/MyDiary/photo/user.jpg" />
+							</div>
+							<div class="form-group row">
+								<label for="edit-upload-photo" class="col-sm-2 control-label">用户头像:</label>
+								<div class="col-sm-10">
+									<input type="file" id="edit-upload-photo" name="photo"
+										style="display: inline-block">
+									<!-- <p class="help-block">Example block-level help text here.</p> -->
+									<button id="edit-upload-btn" class="btn btn-success btn-sm">上传图片</button>
+									<span class="help-block"></span>
+								</div>
+							</div>
+						</form>
+						<form class="form-horizontal editForm">
+							<!--  隐藏域  在页面存储但不需要显示出来的值 -->
+							<div class="form-group">
+								<input id="edit_photo" type="hidden" name="photo"
+									value="/MyDiary/photo/user.jpg" />
+							</div>
 
-						<div class="form-group">
-							<label for="edit_photo-preview" class="col-sm-2 control-label">预览头像:</label>
-							<img class="col-sm-10" id="edit_photo-preview" alt="照片"
-								style="max-width: 100px; max-height: 100px;" title="照片"
-								src="/MyDiary/photo/user.jpg" />
-						</div>
-						<div class="form-group row">
-							<label for="edit-upload-photo" class="col-sm-2 control-label">用户头像:</label>
-							<div class="col-sm-10">
-								<input type="file" id="edit-upload-photo" name="photo"
-									style="display: inline-block">
-								<!-- <p class="help-block">Example block-level help text here.</p> -->
-								<button id="edit-upload-btn" class="btn btn-success btn-sm">上传图片</button>
-								<span class="help-block"></span>
-							</div>
-						</div>
-					</form>
-					<form class="form-horizontal editForm">
-						<!--  隐藏域  在页面存储但不需要显示出来的值 -->
-						<div class="form-group">
-							<input id="edit_photo" type="hidden" name="photo"
-								value="/MyDiary/photo/user.jpg" />
-						</div>
+							<div class="form-group">
+								<label for="username_edit_input" class="col-sm-2 control-label">用户名:</label>
+								<div class="col-sm-7">
+									<!--  name 与实体类中的名字一致 -->
+									<input type="text" class="form-control"
+										id="username_edit_input" name="username" placeholder="请输入用户名"
+										autoComplete="off"> <span class="help-block"></span>
 
-						<div class="form-group">
-							<label for="username_edit_input" class="col-sm-2 control-label">用户名:</label>
-							<div class="col-sm-7">
-								<!--  name 与实体类中的名字一致 -->
-								<%-- <c:if test="${userType == 2}">
-								    <input type="text" class="form-control" id="username_edit_input"
-									name="username" placeholder="请输入用户名" readonly> 
-								</c:if>
-								<c:if test="${userType == 1}">
-								    <input type="text" class="form-control" id="username_edit_input"
-									name="username" placeholder="请输入用户名"> 
-								</c:if> --%>
-								<input type="text" class="form-control" id="username_edit_input"
-									name="username" placeholder="请输入用户名"> 
-								<span class="help-block"></span>
-									
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<label for="password_edit_input" class="col-sm-2 control-label">密码:</label>
-							<div class="col-sm-7">
-								<input type="password" class="form-control"
-									id="password_edit_input" name="password" placeholder="请输入密码">
-								<span class="help-block"></span>
+							<div class="form-group">
+								<label for="password_edit_input" class="col-sm-2 control-label">密码:</label>
+								<div class="col-sm-7">
+									<input type="password" class="form-control"
+										id="password_edit_input" name="password" placeholder="请输入密码">
+									<span class="help-block"></span>
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<label for="sex_edit" class="col-sm-2 control-label">性别:</label>
-							<div class="col-sm-7">
-								<label class="radio-inline"> <input type="radio"
-									name="sex" id="male_edit" value="男" >男
-								</label> <label class="radio-inline"> <input type="radio"
-									name="sex" id="female_edit" value="女">女
-								</label>
+							<div class="form-group">
+								<label for="sex_edit" class="col-sm-2 control-label">性别:</label>
+								<div class="col-sm-7">
+									<label class="radio-inline"> <input type="radio"
+										name="sex" id="male_edit" value="男">男
+									</label> <label class="radio-inline"> <input type="radio"
+										name="sex" id="female_edit" value="女">女
+									</label>
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<label for="signature_edit" class="col-sm-2 control-label">个性签名:</label>
-							<div class="col-sm-7">
-								<!-- <input type="textarea" class="form-control" id="signature_edit"
+							<div class="form-group">
+								<label for="signature_edit" class="col-sm-2 control-label">个性签名:</label>
+								<div class="col-sm-7">
+									<!-- <input type="textarea" class="form-control" id="signature_edit"
 									name="signature" placeholder="请输入个性签名" rows="3"> -->
-								<textarea class="form-control" id="signature_edit"
-									name="signature" placeholder="请输入个性签名" rows="3"></textarea>
+									<textarea class="form-control" id="signature_edit"
+										name="signature" placeholder="请输入个性签名" rows="3"></textarea>
+								</div>
 							</div>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" id="user_update_btn">更新</button>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" id="user_update_btn">更新</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	
- </section> 
-</section>
+	
+	<!-- 添加用户模态框 -->
+	<div>
+		<div class="modal fade" id="addUserModal" aria-labelledby="addUser1"
+			aria-hidden="true">
+			<div class="modal-dialog ">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">添加用户</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" id="photoForm" method="post"
+							enctype="multipart/form-data" action="upload_photo"
+							target="photo_target">
+
+							<div class="form-group">
+								<label for="photo-preview" class="col-sm-2 control-label">预览头像:</label>
+								<img class="col-sm-10" id="photo-preview" alt="照片"
+									style="max-width: 100px; max-height: 100px;" title="照片"
+									src="/MyDiary/photo/user.jpg" />
+							</div>
+							<div class="form-group row">
+								<label for="add-upload-photo" class="col-sm-2 control-label">用户头像:</label>
+								<div class="col-sm-10">
+									<input type="file" id="add-upload-photo" name="photo"
+										style="display: inline-block">
+									<!-- <p class="help-block">Example block-level help text here.</p> -->
+									<button id="photo-upload-btn" class="btn btn-success btn-sm">上传图片</button>
+									<span class="help-block"></span>
+								</div>
+							</div>
+						</form>
+						<form class="form-horizontal addForm">
+							<!--  隐藏域  在页面存储但不需要显示出来的值 -->
+							<div class="form-group">
+								<input id="add_photo" type="hidden" name="photo"
+									value="/MyDiary/photo/user.jpg" />
+							</div>
+
+							<div class="form-group">
+								<label for="username_add_input" class="col-sm-2 control-label">用户名:</label>
+								<div class="col-sm-7">
+									<!--  name 与实体类中的名字一致 -->
+									<input type="text" class="form-control" id="username_add_input"
+										name="username" placeholder="请输入用户名" autoComplete="off">
+									<span class="help-block"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="password_add_input" class="col-sm-2 control-label">密码:</label>
+								<div class="col-sm-7">
+									<input type="password" class="form-control"
+										id="password_add_input" name="password" placeholder="请输入密码">
+									<span class="help-block"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="sex_add_input" class="col-sm-2 control-label">性别:</label>
+								<div class="col-sm-7">
+									<label class="radio-inline"> <input type="radio"
+										name="sex" id="sex1_add" value="男" checked>男
+									</label> <label class="radio-inline"> <input type="radio"
+										name="sex" id="sex2_add" value="女">女
+									</label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="signature_add" class="col-sm-2 control-label">个性签名:</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" id="signature_add"
+										name="signature" placeholder="请输入个性签名" style="height: 130px;">
+									<!-- <textarea rows="10" cols="20"></textarea> -->
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" id="user_save_btn">保存</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	
+
+
+	</section> </section>
 
 	<div class="sp_footer">
 		<div class="row">
@@ -300,14 +302,15 @@
 		</div>
 	</div>
 	<!-- 提交表单处理iframe框架 -->
-<iframe id="photo_target" name="photo_target" onload="uploaded(this)" style="display: none" ></iframe>    
+	<iframe id="photo_target" name="photo_target" onload="uploaded(this)"
+		style="display: none"></iframe>
 
 	<script type="text/javascript">
 		//全局变量 保存表格中数据的总记录数,当前页数
 		var totalRecord, currentPage;
 		//记录弹出模态框的index
 		var index = 1051;
-		var valiFlag;
+		var valiFlag = true;
 		$(function() {
 			/* 页面加载完成后，直接发送一个ajax请求 获取分页数据  显示数据列表的首页*/
 			to_page(1); 
@@ -366,6 +369,7 @@
 								//为编辑按钮添加一个自定义属性，表示当前编辑的管理员id
 								editBtn.attr("edit-id", user.id);
 								if(${userType == 1}){
+									//if(${userType == 1}){
 									var delBtn = $("<button></button>")
 									.addClass(
 											"btn btn-danger btn-sm delete_btn")
@@ -391,7 +395,7 @@
 												sexTd).append(
 														signatureTd).append(btnTd).appendTo(
 										"#users_table tbody");
-							})
+							});
 		}
 		//2.解析显示分页信息
 		function build_page_info(result) {
@@ -491,7 +495,7 @@
 
 			var k = obj.getAttribute("data-target");
 			$(k).css("z-index", index);
-			index++;
+			index+=2;
 			alert("当前模态框的index：" + index);
 		}
 
@@ -519,14 +523,13 @@
 			}
 		}
 		
-		function usernameValidate(){
+		/* function usernameValidate(){
 			//1.获取要校验的数据
 			var username = $("#username_add_input").val();
 			var regName = /(^[a-zA-Z0-9_-]{5,16}$)|(^[\u2E80-\u9FFF]{2,5})/; //中文2-5个
 			//用户名校验
 			if (!regName.test(username)) {
 				valiFlag = false;
-				/* alert("用户名可以是2-5位中文或者6-16位英文和数字，下划线，中划线的组合"); */
 				show_validate_msg("#username_add_input",
 						"error",
 						"用户名可以是2-5位中文或者5-16位英文和数字，下划线，中划线的组合");
@@ -540,7 +543,7 @@
 			}
 
 			return valiFlag;
-		}
+		} */
 		
 		//用户名修改失去焦点触发校验
 		$("#username_edit_input")
@@ -591,21 +594,16 @@
 
 			return valiFlag;
 		});
-		function passwordValidate(ele){
+		/* function passwordValidate(ele){
 			console.log("修改窗口密码框失去焦点")
 			//密码校验
 			var password = $(ele).val();
-			/* alert(password); */
 			var regPassword = /^[a-zA-Z0-9_-]{5,18}$/;
 			if (!regPassword.test(password)) {
 				valiFlag = false;
-				/* alert("密码为6-18位字母数字下划线中划线的组合"); */
 				//清空这个元素之前的样式
 				show_validate_msg(ele,
 						"error", "密码为5-18位字母数字下划线中划线的组合");
-				/*  $("#password_add_input").parent().addClass("has-error");
-				$("#password_add_input").next("span").text("密码为6-18位字母数字下划线中划线的组合"); */
-
 			} else {
 				valiFlag = true;
 				show_validate_msg(ele,
@@ -616,7 +614,7 @@
 			}
 
 			return valiFlag;
-		}
+		} */
 		
 		//添加窗口用户名校验(失去焦点时触发)
 		$("#username_add_input")
@@ -670,11 +668,7 @@
 
 							return valiFlag;
 						});
-		/* //检查用户名是否已存在
-		$("#username_add_input").change(function(){
-			//发送ajax请求校验用户名
-		}); */
-
+	
 		//提交新增用户模态框的信息 保存用户信息
 		$("#user_save_btn").click(
 				function() {
@@ -732,7 +726,6 @@
 				//确认，发送ajax请求删除
 				$.ajax({
 					url : "${APP_PATH}/user/delete/" + id,
-					/* url:"${APP_PATH}/admin/edit/"+$(this).attr("edit-id"),  */
 					type : "POST",
 					success : function(result) {
 						if (result.code == 100) {
@@ -748,9 +741,6 @@
 				});
 			}
 
-			/* $("#editUserModal").modal({
-				  backdrop:"static"
-			  }) */
 		});
 
 		//实现全选，全不选功能
@@ -810,12 +800,6 @@
 			})
 		});
 
-		/*  $(document).on("click","#search_btn",function(){
-		 
-		  var keywords = $("#search_words").val();
-		  alert("点击了搜索按钮,keywords为：" + keywords);
-		 }) */
-
 		//搜索用户 模糊查询
 		$("#search_btn").click(function() {
 			var keywords = $("#search_words").val();
@@ -868,6 +852,8 @@
 								alert("校验不通过");
 								return false;
 							}
+							/* alert($("#editUserModal .editForm")
+									.serialize()); */
 							//发送ajax请求  保存更新的管理员数据
 							$.ajax({
 								/* url:"${APP_PATH}/admin/edit", */
@@ -897,27 +883,6 @@
 				return false;
 			}
 
-			/* //发送ajax请求  保存更新的管理员数据
-			 $.ajax({
-				url : "${APP_PATH}/user/upload_photo/",
-				type : "POST",
-				data : $("#photoForm").serialize(),
-				success : function(result) {
-					if(result.code == 200){
-						if(result.datalist.errMsg != null){
-							show_validate_msg("#photo-upload-btn",
-									"error", result.datalist.errMsg);
-						}
-					}else  if(result.code == 100){
-						if(result.datalist.successMsg != null){
-							show_validate_msg("#photo-upload-btn",
-									"success", result.datalist.successMsg);
-						}
-					}
-					
-					
-				}
-			})  */
 			$("#photoForm").submit();
 		})
 		

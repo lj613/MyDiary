@@ -65,13 +65,6 @@ public class UserController {
 	public Msg getUsersWithJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model,
 			HttpServletRequest request) {
 		
-		/*
-		 * try{ Admin admin = (Admin)request.getSession().getAttribute("user"); }catch
-		 * (Exception e) { // TODO: handle exception //如果是普通用户，不是管理员则只能查询到自己的信息 User
-		 * loginUser = (User)request.getSession().getAttribute("user");
-		 * 
-		 * }
-		 */
 		Object userType =  request.getSession().getAttribute("userType"); 
 		
 		if("2".equals(userType.toString())) {
@@ -97,17 +90,7 @@ public class UserController {
 			return Msg.success().add("pageInfo", pageInfo);
 		}
 		
-		
-		// 使用分页插件 传入页码和每页的大小
-		/* PageHelper.startPage(pn, 6); */
-		/* List<User> userList = userService.findList(); */
-		// System.out.println("获取到的用户列表结果："+ userList);
-		// 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面 传入连续显示的页数5
-
-		/* PageInfo pageInfo = new PageInfo(userList, 5); */
-		/*
-		 * return Msg.success().add("pageInfo", pageInfo);
-		 */	}
+	}
 	
 	/**
 	 * 模糊查询
@@ -144,7 +127,7 @@ public class UserController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
 	public Msg addUser(@RequestParam("username") String username, @RequestParam("password") String password,
-			User user) {
+			User user,HttpServletRequest request) {
 
 		System.out.println("提交的用户信息：" + user.getUsername() + user.getPassword() + user.getSex() + user.getPhoto()
 				+ user.getSignature());
@@ -163,8 +146,15 @@ public class UserController {
 		if (existuser != null) {
 			return Msg.fail().add("user_msg", "用户名已存在");
 		}
-		userService.add(user);
-
+		if(userService.add(user)<=0) {
+			return Msg.fail().add("user_msg", "添加用户失败");
+		}
+		
+		Integer maleNum = userService.getNumBySex("男");
+	    Integer femaleNum = userService.getNumBySex("女");
+		request.getSession().setAttribute("maleNum", maleNum);
+		request.getSession().setAttribute("femaleNum", femaleNum);
+		
 		return Msg.success();
 	}
 	
@@ -195,13 +185,13 @@ public class UserController {
 		 return Msg.success();
 	 }
 	 /**
-      *     管理员删除(单个，批量删除)
+      *     用户删除(单个，批量删除)
   * @param id
   * @return
   */
  @RequestMapping(value="/delete/{ids}",method=RequestMethod.POST)
  @ResponseBody 
- public Msg deleteById(@PathVariable("ids") String ids) {
+ public Msg deleteById(@PathVariable("ids") String ids,HttpServletRequest request) {
 	 System.out.println("选中的所有id:"+ ids);
 	 if(ids.contains("-")) {
 		 //批量删除
@@ -225,6 +215,10 @@ public class UserController {
 			  return Msg.fail(); 
 		  }
 	 }
+	 Integer maleNum = userService.getNumBySex("男");
+     Integer femaleNum = userService.getNumBySex("女");
+     request.getSession().setAttribute("maleNum", maleNum);
+	 request.getSession().setAttribute("femaleNum", femaleNum);
 	 return Msg.success(); 
  }
  
@@ -260,7 +254,8 @@ public class UserController {
 			return Msg.fail().add("errMsg", "文件格式不正确，请上传jpg,png,gif,jpeg格式的图片！");
 		}
 		String savePath = request.getServletContext().getRealPath("/") + "\\upload\\";
-		System.out.println(savePath);
+		System.out.println("图片上传到的根路径"+request.getServletContext().getRealPath("/"));
+		System.out.println("图片保存的位置"+savePath);
 
 		File savePathFile = new File(savePath);
 		if (!savePathFile.exists()) {
