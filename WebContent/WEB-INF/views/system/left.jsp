@@ -170,7 +170,7 @@ a, a:hover, a:focus {
 					<div class="panel-body">
 						<ul class="nav">
 							<li><a href="#"><span class="iconfont icon-list"></span>日记列表</a></li>
-							<li><a href="#">添加栏目2</a></li>
+							<li><a href="../diary/w_diary" target="body"><span class="iconfont icon-list"></span>写日记</a></li>
 							<li><a href="#">添加栏目3</a></li>
 							<li><a href="#">添加栏目4</a></li>
 						</ul>

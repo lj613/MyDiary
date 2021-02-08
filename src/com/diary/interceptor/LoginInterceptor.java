@@ -56,7 +56,7 @@ public class LoginInterceptor  implements HandlerInterceptor{
 			 * response.getWriter().write(JSONObject.fromObject(ret).toString()); return
 			 * false; } response.sendRedirect(request.getContextPath() + "/system/login");
 			 */
-			return false;
+			return true;
 		}
 		return true;
 	}
