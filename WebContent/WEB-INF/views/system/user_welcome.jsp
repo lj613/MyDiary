@@ -206,7 +206,7 @@ body {
 					</div>
 					<div class="tag-icon-userbox">
 						<div class="tag-icon">
-							<span class="iconfont icon-user"></span>
+							<span class="iconfont icon-category"></span>
 						</div>
 					</div>
 				</div>
@@ -214,7 +214,7 @@ body {
 					<div class="tag-info">
 						<h3 class="text">日记总数</h3>
 						<div class="num">
-							8 <span>篇</span>
+							${diaryNum} <span>篇</span>
 						</div>
 					</div>
 					<div class="tag-icon-diarybox">
@@ -345,9 +345,44 @@ body {
 	        return fmt;
 	    }
 	  
-
+        
+	  /*随机色生成函数  16进制 */
+	  function generateColor(){
+		  let res = '#';
+	        const len =Math.random()<0.5?3:6;
+	        const hash =[0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'];
+	        for(let i=0;i<len;i++){
+	            res += hash[Math.floor(Math.random()*16)];
+	        }
+	        return res;
+	  }
+	  
+	  
 	     // 日记类别分布图
 	    var diaryChart = echarts.init(document.getElementById('diary-ategory'));
+	    var diaryTypeList = ${diaryTypeList2}; //日记类别列表
+	    var colorList = []; //日记类别统计图的颜色列表
+	    var typeNameList = [] ; //日记类别名称列表
+	    var diaryTypeData = ${diaryTypeData}; //日记类别名称和对应日记数量
+	    for(var i=0;i< diaryTypeList.length;i++){
+	    	//构建类别名称数组
+	    	diaryType = diaryTypeList[i];
+	    	typeNameList.push( diaryType.typeName); 
+	    } 
+	    
+	    /*构造日记类别统计图的颜色列表*/
+	    for(var i=0;i<diaryTypeData.length;i++){
+	    	colorList[i] = generateColor();
+	    }
+	    console.log("颜色列表："+ colorList);
+	   //console.log(typeNameList);
+	   /*  var diarytype1Num = ${diarytype1Num};
+	    var diarytype2Num = ${diarytype2Num};
+	    var diarytype3Num = ${diarytype3Num};
+	    var diarytype4Num = ${diarytype4Num}; */
+	    
+
+	    
 	    option = {
 	        title : {
 	            text: '日记类别分布图',       //大标题
@@ -361,35 +396,40 @@ body {
 	        legend: {                           //图例组件。
 	            // orient: 'vercentertical',             //图例列表的布局朝向
 	            left: 'center',
-	            data: ['工作','生活',"学习","人生感叹"]
+	            //data: ['工作','生活',"学习","人生感叹"]
+	            data: typeNameList
 	        },
+	        color:colorList,
 	        series : [              //系列列表。每个系列通过 type 决定自己的图表类型
 	            {
 	                name: '访问来源',
 	                type: 'pie',
 	                radius : '55%',
 	                center: ['50%', '45%'],
-	                data:[
-	                    {value:100, name:'工作'},
-	                    {value:310, name:'生活'},
-	                    {value:100, name:'学习'},
-	                    {value:310, name:'人生感叹'},
-	                ],
+	                /*data:[
+	                    {value:diarytype1Num, name:'工作类'},
+	                    {value:diarytype2Num, name:'生活类'},
+	                    {value:diarytype3Num, name:'学习类'},
+	                    {value:diarytype4Num, name:'人生感叹'},
+	                ], */
+	                data:diaryTypeData,
 	                itemStyle: {
 	                    emphasis: {
 	                        shadowBlur: 10,
 	                        shadowOffsetX: 0,
 	                        shadowColor: 'rgba(0, 0, 0, 0.5)'
 	                    },
-	                    normal:{
+	                   /*  normal:{
 	                        color:function(params) {
 	                            //自定义颜色
-	                            var colorList = [          
-	                                    'skyblue', 'pink',"plum","orange",
-	                                ];
+	                            var colorList = colorList;
+	                            
+	                           //  var colorList = [          
+	                              //      'skyblue', 'pink',"plum","orange"
+	                              //  ]; 
 	                                return colorList[params.dataIndex]
 	                        }
-	                    }
+	                    } */
 
 	                }
 	            }

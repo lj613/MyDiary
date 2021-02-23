@@ -425,7 +425,7 @@
 					}
 					//2.发送ajax请求保存用户  
 					//序列表格内容为字符串
-					alert($("#addDiaryTypeModal .addForm").serialize());
+					//alert($("#addDiaryTypeModal .addForm").serialize());
 					$
 							.ajax({
 								url : "${APP_PATH}/diaryType/add",

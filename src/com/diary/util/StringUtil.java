@@ -37,4 +37,27 @@ public class StringUtil {
 	public static String generateUn(String prefix,String suffix){
 		return prefix + new Date().getTime() + suffix;
 	}
+	
+	
+	/**
+	 * 字符串前后加%
+	 * @param str
+	 * @return
+	 */
+	public static String formatLike(String str) {
+		if(isNotEmpty(str)) {
+			return "%" + str + "%";
+		}
+		return null;
+	}
+	
+	/**
+	 * 判断字符串是否为空
+	 */
+	public static boolean isNotEmpty(String str) {
+		if(str != null && !"".equals(str.trim())) {
+			return true;
+		}
+		return false;
+	}
 }

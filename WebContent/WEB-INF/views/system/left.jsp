@@ -176,23 +176,44 @@ a, a:hover, a:focus {
 				<div id="sub3" class="collapse panel-collapse">
 					<div class="panel-body">
 						<ul class="nav">
-							<li><a href="#"><span class="iconfont icon-list"></span>日记列表</a></li>
+							<li><a href="../diary/list" target="body"><span class="iconfont icon-list"></span> 日记列表</a></li>
 							<li><a href="#">添加栏目3</a></li>
-							<li><a href="../diaryType/list" target="body"><span class="iconfont icon-category">日记类型</a></li>
+							<c:if test="${userType == 2 }">
+							     <li><a href="../diary/w_diary" target="body"><span class="iconfont icon-write"></span> 写日记</a></li>
+							</c:if>
+						    <!--  
+							<li><a href="../diaryType/list" target="body"><span class="iconfont icon-category"></span>日记类型</a></li>
+						     -->
 							<li><a href="#">添加栏目4</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
-
+			
+			<c:if test="${userType == 1 }">
+			<div class="panel panel-default">
+				<div id="header3" class="panel-heading" data-toggle="collapse"
+					data-target="#sub4" data-parent="#panelContainer">
+					<i class="iconfont icon-category"></i> <a href="#">日记类别管理</a> <span
+						class="iconfont icon-arrow-right pull-right"></span>
+				</div>
+				<div id="sub4" class="collapse panel-collapse">
+					<div class="panel-body">
+						<ul class="nav">
+							<li><a href="../diaryType/list" target="body"><span class="iconfont icon-list"></span>日记类型列表</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+            </c:if>
 			<div class="panel panel-default">
 				<div id="header2" class="panel-heading" data-toggle="collapse"
-					data-target="#sub4" data-parent="#panelContainer">
+					data-target="#sub5" data-parent="#panelContainer">
 					<!-- <i class="glyphicon glyphicon-leaf"></i>  -->
 					<i class="iconfont icon-settings"></i> <a href="#">系统管理</a> <span
 						class="iconfont icon-arrow-right pull-right"></span>
 				</div>
-				<div id="sub4" class="collapse panel-collapse">
+				<div id="sub5" class="collapse panel-collapse">
 					<div class="panel-body">
 						<ul class="nav">
 							<li><a href="#" onclick="logout()"><span

@@ -6,11 +6,18 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "8338682",
-      "name": "分类",
+      "icon_id": "689261",
+      "name": "类目 品类 分类 类别.2",
       "font_class": "category",
-      "unicode": "e6c6",
-      "unicode_decimal": 59078
+      "unicode": "e7f8",
+      "unicode_decimal": 59384
+    },
+    {
+      "icon_id": "2071579",
+      "name": "填写日报",
+      "font_class": "write",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
     },
     {
       "icon_id": "6542384",

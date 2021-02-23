@@ -214,7 +214,7 @@ body {
 					<div class="tag-info">
 						<h3 class="text">日记总数</h3>
 						<div class="num">
-							8 <span>篇</span>
+							${diaryTotalNum} <span>篇</span>
 						</div>
 					</div>
 					<div class="tag-icon-diarybox">

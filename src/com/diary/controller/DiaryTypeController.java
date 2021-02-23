@@ -20,6 +20,8 @@ import com.diary.util.Msg;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import net.sf.json.JSONArray;
+
 /**
  * 日记类型控制器
  * 
@@ -59,10 +61,14 @@ public class DiaryTypeController {
 	public Msg getDiaryTypesWithJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model,
 			HttpServletRequest request) {
 
-		System.out.println("调用日记类型列表获取方法hhhhhhhhhhhhhhhhhh");
+		//System.out.println("调用日记类型列表获取方法hhhhhhhhhhhhhhhhhh");
 		// 使用分页插件 传入页码和每页的大小
 		PageHelper.startPage(pn, 10);
+		//查询所有日记类型
 		List<DiaryType> diaryTypeList = diaryTypeService.findList();
+		JSONArray  diaryTypeList2 = JSONArray.fromObject(diaryTypeList);
+		//保存到session中
+		request.getSession().setAttribute("diaryTypeList2", diaryTypeList2);
 		// 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面 传入连续显示的页数5
 		PageInfo pageInfo = new PageInfo(diaryTypeList, 5);
 		return Msg.success().add("pageInfo", pageInfo);
@@ -92,6 +98,11 @@ public class DiaryTypeController {
 		}
 		Integer diaryTypeNum = diaryTypeService.getTotalNum();
 		request.getSession().setAttribute("diaryTypeNum", diaryTypeNum);
+		//查询所有日记类型
+		List<DiaryType> diaryTypeList = diaryTypeService.findList();
+		JSONArray  diaryTypeList2 = JSONArray.fromObject(diaryTypeList);
+		//保存到session中
+	    request.getSession().setAttribute("diaryTypeList2", diaryTypeList2);
 		return Msg.success();
 	}
 
@@ -158,6 +169,11 @@ public class DiaryTypeController {
 		}
 		Integer diaryTypeNum = diaryTypeService.getTotalNum();
 		request.getSession().setAttribute("diaryTypeNum", diaryTypeNum);
+		//查询所有日记类型
+		List<DiaryType> diaryTypeList = diaryTypeService.findList();
+		JSONArray  diaryTypeList2 = JSONArray.fromObject(diaryTypeList);
+		//保存到session中
+	    request.getSession().setAttribute("diaryTypeList2", diaryTypeList2);
 		return Msg.success();
 	}
 
