@@ -92,7 +92,7 @@ html {
 						<th width="150">用户编号</th>
 						<th width="100">密码</th>
 						<th width="80">性别</th>
-						<th style="max-width: 200px, width:200px">个性签名</th>
+						<th style="max-width: 250px, width:250px">个性签名</th>
 						<th style="min-width: 190px">操作</th>
 					</tr>
 				</thead>
@@ -197,6 +197,7 @@ html {
 	
 	
 	<!-- 添加用户模态框 -->
+    <c:if test="${userType == 1}">
 	<div>
 		<div class="modal fade" id="addUserModal" aria-labelledby="addUser1"
 			aria-hidden="true">
@@ -284,7 +285,8 @@ html {
 			</div>
 		</div>
 	</div>
-
+   </c:if>
+   <!-- 添加用户模态框结束 -->
 	
 	
 
@@ -356,7 +358,7 @@ html {
 										user.password);
 								var sexTd = $("<td></td>").append(
 										user.sex);
-								var signatureTd = $("<td style='max-width:300px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'></td>").append(
+								var signatureTd = $("<td style='max-width:300px;width:250px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'></td>").append(
 										user.signature);
 								var editBtn = $("<button></button>")
 										.addClass(
@@ -370,6 +372,7 @@ html {
 								editBtn.attr("edit-id", user.id);
 								if(${userType == 1}){
 									//if(${userType == 1}){
+									//console.log("管理员登陆，编辑按钮，删除按钮");
 									var delBtn = $("<button></button>")
 									.addClass(
 											"btn btn-danger btn-sm delete_btn")
@@ -383,8 +386,8 @@ html {
 									var btnTd = $("<td></td>").append(editBtn)
 									.append(delBtn);
 								}else{
-									var btnTd = $("<td></td>").append(editBtn)
-									.append(delBtn);
+									//console.log("普通用户登陆，只有编辑按钮");
+									var btnTd = $("<td></td>").append(editBtn);
 								}
 								
 								$("<tr></tr>").append(checkboxTd).append(
@@ -788,6 +791,7 @@ html {
 
 		//给修改按钮绑定修改模态框弹出事件
 		$(document).on("click", ".edit_btn", function() {
+		    alert("点击了修改按钮");
 			changeIndex(this);
 			/* reset_form("#editUserModal .editPhotoForm"); */
 			//alert("edit");

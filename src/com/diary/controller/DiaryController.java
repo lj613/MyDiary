@@ -82,6 +82,21 @@ public class DiaryController {
 		model.setViewName("diary/modify_diary");
 		return model;
 	}
+	
+	
+	/**
+	 * 日记详情页面
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	//@RequestMapping(value = "/detail", method = RequestMethod.GET)
+
+	public ModelAndView detail(ModelAndView model) {
+		model.setViewName("diary/diary_detail");
+		return model;
+	}
 
 	/**
 	 * 获取日记列表
@@ -204,6 +219,9 @@ public class DiaryController {
 		 diaryService.edit(diary);
 		 return Msg.success();
 	 }
+	 
+	
+	 
 	 
 	 /**
 	  * 根据日记id查询日记信息

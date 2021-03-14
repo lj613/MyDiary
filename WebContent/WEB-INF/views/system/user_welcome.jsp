@@ -374,7 +374,7 @@ body {
 	    for(var i=0;i<diaryTypeData.length;i++){
 	    	colorList[i] = generateColor();
 	    }
-	    console.log("颜色列表："+ colorList);
+	    //console.log("颜色列表："+ colorList);
 	   //console.log(typeNameList);
 	   /*  var diarytype1Num = ${diarytype1Num};
 	    var diarytype2Num = ${diarytype2Num};

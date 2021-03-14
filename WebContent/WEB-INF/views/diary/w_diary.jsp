@@ -164,7 +164,7 @@
 			$(ele).find(".help-block").text("");
 		}
 		
-		//提交新增用户模态框的信息 保存用户信息
+		//提交新增日记的信息 保存日记信息
 		$("#diary_save_btn").click(
 				function() {
 					alert("点击了保存日记按钮");

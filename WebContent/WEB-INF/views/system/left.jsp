@@ -161,8 +161,14 @@ a, a:hover, a:focus {
 				<div id="sub2" class="collapse panel-collapse">
 					<div class="panel-body">
 						<ul class="nav">
-							<li><a href="../user/list" target="body"><span
-									class="iconfont icon-list"></span>用户列表</a></li>
+							<c:if test="${userType == 1 }">
+								<li><a href="../user/list" target="body"><span
+										class="iconfont icon-list"></span>用户列表</a></li>
+							</c:if>
+							<c:if test="${userType == 2 }">
+							<li><a href="../user/personal" target="body"><span
+										class="iconfont icon-list"></span>个人中心</a></li>
+							</c:if>
 						</ul>
 					</div>
 				</div>

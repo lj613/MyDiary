@@ -52,6 +52,12 @@ public class UserController {
 		return model;
 	}
 	
+	@RequestMapping(value = "/personal", method = RequestMethod.GET)
+	public ModelAndView personal(ModelAndView model) {
+		model.setViewName("user/personal");
+		return model;
+	}
+	
 	/**
 	 * 获取用户列表
 	 * 
@@ -181,9 +187,18 @@ public class UserController {
 	  */
 	 @RequestMapping(value="/edit/{id}",method=RequestMethod.POST)
 	 @ResponseBody 
-	 public Msg edit( User  user) {
+	 public Msg edit( User  user,HttpServletRequest request,@PathVariable("id") Integer id) {
 		 //System.out.println("将要更新的用户数据："+ user);
-		 userService.edit(user);
+		userService.edit(user);
+		System.out.println("编辑用户的id:"+id);
+		Object userType =  request.getSession().getAttribute("userType"); 
+		if("2".equals(userType.toString())) {
+			//普通用户
+			//User loginedUser = (User) request.getSession().getAttribute("user");
+			//Long userId = loginedUser.getId();
+			 User newUser = userService.findById(id);
+			 request.getSession().setAttribute("user", newUser);
+		}
 		 return Msg.success();
 	 }
 	 

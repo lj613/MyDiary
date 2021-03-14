@@ -68,59 +68,11 @@
 </style>
 </head>
 <body>
-	<div class="main">
-	   <%-- ${param.diaryId} --%>
-	   ${diaryTypeList}
-		<!-- 标题部分 -->
-		<div class="diaryTitle">
-			<h2>修改日记</h2>
-		</div>
-
-		<!-- 内容部分 -->
-		<div class="diary_container">
-			<form class="form-horizontal" id="edit_diary_form">
-			     <!--   隐藏表单（提交日记内容）  -->
-			    <input name="content" type="hidden" id="diaryContent">
-				<div class="form-group">
-					<label for="title" class="col-md-1 control-label" style="min-width:90px">日记标题：</label>
-					<div class="col-md-5">
-						<input type="text" class="form-control" id="title_edit_input" name="title"
-							autoComplete="off"> <span
-							class="help-block"></span>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="diaryTypeId" class="col-md-1 control-label" style="min-width:90px">日记类别：</label>
-					<div class="col-md-5">
-						<select class="form-control" name="diaryType.diaryTypeId" id="diaryType" editable="false" panelHeight="auto">
-							<c:forEach var="diaryType" items="${diaryTypeList2}">
-							   <option value="${diaryType.diaryTypeId}">${diaryType.typeName}</option>
-							</c:forEach>
-							<!-- <option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option> -->
-						</select>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="col-md-1 control-label" style="min-width:90px">日记内容：</label>
-					<div class="col-md-10">
-						<script type="text/plain" id="editor" 
-							style="width:100%;height:400px;"></script>
-					</div>
-				</div>
-				
-			</form>
-			<div class="save_container">
-				   <button class="btn btn-success" id="diary_save_btn">完成修改</button>
-				</div>
-		</div>
-
+      
+	<div> 
+      	${param.id}    
+      	askdfjlasdj faslgjlsa gjl
 	</div>
-
 	<script type="text/javascript" charset="gb2312">
 		//  实例化编辑器 
 		var ue = UE.getEditor("editor");
@@ -229,7 +181,7 @@
 					
 					//alert($("#edit_diary_form").serialize());
 					 $.ajax({
-						 url : "${APP_PATH}/diary/modify/"+${param.diaryId},
+						 url : "${APP_PATH}/diary/modify/"+${param.id},
 						 type : "POST",
 						 //序列表格内容为字符串
 						 data : $("#edit_diary_form").serialize(),

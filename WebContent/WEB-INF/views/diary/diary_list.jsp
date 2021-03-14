@@ -32,12 +32,36 @@ html {
 	
 }
 
-
-.diary_content p{
+/* .diary_content p{
      max-width: 640px;
      white-space: nowrap;
      overflow: hidden;
      text-overflow: ellipsis;
+} */
+
+ .diary_content {
+	max-width: 640px;
+} 
+/* .diary_content {
+	max-width: 640px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+} */
+
+/* .diary_content{
+text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  width:500px;
+} */
+.diary_title {
+	text-align: center;
+	line-height: 1;
 }
 </style>
 </head>
@@ -53,21 +77,22 @@ html {
 	<div class="projectList_cons">
 		<div class="row">
 			<div class="col-md-3">
-			    <c:if test="${userType == 2 }">
+				<c:if test="${userType == 2 }">
 					<button type="button" class="btn btn-success" data-toggle="modal"
 						id="diary_add_btn">
 						<span class="glyphicon glyphicon-plus"></span> 写日记
 					</button>
-                </c:if>
+				</c:if>
 				<button type="button" class="btn btn-danger" data-toggle="modal"
 					id="diary_delete_all_btn">
 					<span class="glyphicon glyphicon-remove"></span> 批量删除
 				</button>
 			</div>
 			<div class="sp_search">
-			      <!--   实现点击回车执行搜索功能 -->
+				<!--   实现点击回车执行搜索功能 -->
 				<input type="text" placeholder="请输入日记标题" name="keywords"
-					id="search_words" value="" onkeydown="if(event.keyCode==13)searchDiary()">
+					id="search_words" value=""
+					onkeydown="if(event.keyCode==13)searchDiary()">
 				<button type="button" class="btn btn-success" id="search_btn">
 					<span class="glyphicon glyphicon-search"></span> 搜索
 				</button>
@@ -145,12 +170,27 @@ html {
 			$.each(diarylist,
 							function(index, diary) {
 				               /*  alert("单条日记内容" + diary); */
+				                var diaryId = diary.id;
+				               // console.log(diaryId);
+				                var url = "../diary/detail?id=" + diaryId ;
+				               // console.log(url);
 								var checkboxTd = $("<td><input type='checkbox' class='check_item'/></td>");
 								var diaryIdTd = $("<td></td>").append(diary.id);
-								var titleTd = $("<td></td>").append(
-										diary.title);
+								/* var titleTd = $("<td><a class='diary_title' href='../diary/w_diary'></a></td>").append(
+										diary.title); */
+							   /*  var titleTd = $("<a class='diary_title' href='../diary/w_diary'><td ></td></a>").append(
+												diary.title);  */
+								/* var titleTd = $("<a class='diary_title' href='../diary/w_diary'></a>").append($("<td></td>").append(
+										diary.title));  */
+							   /*var titleTd = $("<td></td>").append($("<a href='../diary/detail/80'></a>").append(
+														diary.title)); */ 
+								var titleTd = $("<td></td>").append($("<a></a>").attr("href",url).append(
+												diary.title)); 
+								/* var contentTd = $("<td class='diary_content'></td>").append(
+										diary.content); */
 								var contentTd = $("<td class='diary_content'></td>").append(
-										diary.content);
+												cutString2(diary.content,60));
+										
 								var diaryTypeTd = $("<td></td>").append(
 										diary.diaryType.typeName);
 								var releaseDateTd = $("<td></td>").append(
@@ -408,13 +448,12 @@ html {
 			//1.获取要修改日记的id
 			var diaryId = $(this).attr("edit-id");
 			
-			window.location.href ="<%=request.getContextPath()%>/diary/modify?diaryId="+diaryId
-			//getDiary($(this).attr("edit-id"));
-			//2.把日记id传给修改模态框的更新按钮
-			//$("#diary_update_btn").attr("edit-id", $(this).attr("edit-id"));
-			
-		});
+			window.location.href ="<%=request.getContextPath()%>/diary/modify?diaryId="+ diaryId
+							//getDiary($(this).attr("edit-id"));
+							//2.把日记id传给修改模态框的更新按钮
+							//$("#diary_update_btn").attr("edit-id", $(this).attr("edit-id"));
 
+		});
 
 		//根据id查询日记信息
 		function getDiary(id) {
@@ -486,6 +525,55 @@ html {
 			const dateTime = Y + '年' + M + '月' + D + '日'
 			/*  const dateTime = Y + '年' + M + '月' + D + '日' + H + '时' + Min + '分' + S + '秒' */
 			return dateTime
+		}
+
+		//截取固定长度的字符串
+		function cutString(str, len) {
+			//length属性读出来的汉字长度为1
+			if (str.length * 2 <= len) {
+				return str;
+			}
+			var strlen = 0;
+			var s = "";
+			for (var i = 0; i < str.length; i++) {
+				s = s + str.charAt(i);
+				if (str.charCodeAt(i) > 128) {
+					strlen = strlen + 2;
+					if (strlen >= len) {
+						return s.substring(0, s.length - 1) + "...";
+					}
+				} else {
+					strlen = strlen + 1;
+					if (strlen >= len) {
+						return s.substring(0, s.length - 2) + "...";
+					}
+				}
+			}
+			return s;
+		}
+		
+	  
+		function cutString2(text, length) {
+			//全为中文
+			if (text.replace(/[\u4e00-\u9fa5]/g, 'aa').length <= length) {
+				return text
+			} else {
+				var _length = 0
+				var outputText = ''
+				for (var i = 0; i < text.length; i++) {
+					if (/[\u4e00-\u9fa5]/.test(text[i])) {
+						_length += 2
+					} else {
+						_length += 1
+					}
+					if (_length > length) {
+						break
+					} else {
+						outputText += text[i]
+					}
+				}
+				return outputText + '...'
+			}
 		}
 	</script>
 
