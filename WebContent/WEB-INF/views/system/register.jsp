@@ -161,14 +161,29 @@
 				var password = $("#password").val();
 				var repassword = $("#repassword").val();
 				var vcode = $("#vcode").val();
+				var regName = /(^[a-zA-Z0-9_-]{5,16}$)|(^[\u2E80-\u9FFF]{2,5})/; //中文2-5个
+				var regPassword = /^[a-zA-Z0-9_-]{5,18}$/;
 				if(username == ''){
 				   $.messager.alert("消息提醒","用户名不能为空", "warning");
 				   return;
 				}
+				
+				//用户名校验
+				if (!regName.test(username)) {
+					/* alert("用户名可以是2-5位中文或者6-16位英文和数字，下划线，中划线的组合"); */
+				    $.messager.alert("消息提醒","用户名必须为2-5位中文或者5-16位英文和数字，下划线，中划线的组合", "warning");
+				    return;
+				} 
 				if(password == ''){
 				   $.messager.alert("消息提醒","密码不能为空", "warning");
 				   return;
 			    }
+				if (!regPassword.test(password)) {
+					valiFlag = false;
+					/* alert("密码为6-18位字母数字,下划线,中划线的组合"); */
+					$.messager.alert("消息提醒","密码为5-18位字母,数字,下划线,中划线的组合", "warning");
+					return;
+				}
 				if(repassword == ''){
 					   $.messager.alert("消息提醒","确认密码不能为空", "warning");
 					   return;

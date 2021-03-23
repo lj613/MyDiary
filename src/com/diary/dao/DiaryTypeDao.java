@@ -1,5 +1,6 @@
 package com.diary.dao;
 
+<<<<<<< HEAD
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -106,4 +107,31 @@ public class DiaryTypeDao {
 		pstmt.setString(1, diaryTypeId);
 		return pstmt.executeUpdate();
 	}
+=======
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.diary.entity.DiaryType;
+import com.diary.entity.User;
+
+@Repository
+public interface DiaryTypeDao {
+	
+	public DiaryType findByTypeName(String typeName);
+	
+	public int add(DiaryType diaryType); 
+	
+	public int getTotalNum(); 
+	
+	public List<DiaryType> findList();
+	
+	public DiaryType findById(Integer diaryTypeId);
+
+	public int edit(DiaryType diaryType); 
+	public int deleteById(Integer diaryTypeId);
+	public int deleteAll(String ids);
+	
+	 
+>>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 }

@@ -10,6 +10,7 @@
 	src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
 <title>系统底部</title>
 <style type="text/css">
+<<<<<<< HEAD
       .style1
          {
               margin:5px 0 10px 0;
@@ -25,5 +26,23 @@
 	<form id="homebottom" runat="server">
         <div class="style1 ">© diary 日记本系统</div>
     </form>
+=======
+body{
+   background-color:#fff;
+}
+.style1 {
+	margin: 5px 0 10px 0;
+	text-align: center;
+	color: #000000;
+	font-size: 14px;
+	font-weight: bold;
+}
+</style>
+</head>
+<body>
+	<form id="homebottom" runat="server">
+		<div class="style1 ">© diary 日记本系统</div>
+	</form>
+>>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 </body>
 </html>

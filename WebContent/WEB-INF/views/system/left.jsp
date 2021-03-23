@@ -15,11 +15,19 @@
 <!--  <style type="text/css">
         #tree a:link{text-decoration:none;}
     </style> -->
+<<<<<<< HEAD
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../static/iconfont/iconfont.css">
 	<script src="../static/js/jquery-3.4.1.min.js"></script>
 	<script src="../static/js/bootstrap.min.js"></script>
 	<style type="text/css">
+=======
+<link href="../static/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../static/iconfont/iconfont.css">
+		<script src="../static/js/jquery-3.4.1.min.js"></script>
+		<script src="../static/js/bootstrap.min.js"></script>
+		<style type="text/css">
+>>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 * {
 	margin: 0;
 	padding: 0;
@@ -114,18 +122,30 @@ a, a:hover, a:focus {
 <body>
 	<div id="menu">
 		<div class="panel-group" id="panelContainer">
-		    <div class="panel panel-default">
+			<div class="panel panel-default">
 				<div id="header1" class="panel-heading" data-toggle="collapse"
 					data-target="#sub0" data-parent="#panelContainer">
 					<!-- <i class="glyphicon glyphicon-list-alt"></i> <a href="#">后台首页</a>  -->
 					<!-- <span class="iconfont icon-user"></span> -->
+<<<<<<< HEAD
 					<i class="iconfont icon-index"></i> <a href="../system/welcome" target="body">后台首页</a> 
+=======
+					<c:if test="${userType == 1 }">
+						<i class="iconfont icon-index"></i>
+						<a href="../system/welcome1" target="body">后台首页</a>
+					</c:if>
+					<c:if test="${userType == 2}">
+						<i class="iconfont icon-index"></i>
+						<a href="../system/welcome2" target="body">后台首页</a>
+					</c:if>
+>>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 					<!-- <span
 						class="glyphicon glyphicon-triangle-right pull-right"></span> -->
 				</div>
 			</div>
-			
+
 			<c:if test="${userType == 1 }">
+<<<<<<< HEAD
 			<div class="panel panel-default">
 				<div id="header1" class="panel-heading" data-toggle="collapse"
 					data-target="#sub1" data-parent="#panelContainer">
@@ -139,23 +159,55 @@ a, a:hover, a:focus {
 						<ul class="nav">
 							<li><a href="../admin/list" target="body"><span class="iconfont icon-list"></span>管理员列表</a></li>
 						</ul>
+=======
+				<div class="panel panel-default">
+					<div id="header1" class="panel-heading" data-toggle="collapse"
+						data-target="#sub1" data-parent="#panelContainer">
+						<!-- <i class="glyphicon glyphicon-list-alt"></i>  -->
+						<i class="iconfont icon-admin"></i> <a href="#">管理员中心</a> <span
+							class="iconfont icon-arrow-right pull-right"></span>
+					</div>
+					<div id="sub1" class="collapse panel-collapse">
+						<div class="panel-body">
+							<ul class="nav">
+								<li><a href="../admin/list" target="body">
+								<span class="iconfont icon-list"></span>管理员列表</a></li>
+							</ul>
+						</div>
+>>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 					</div>
 				</div>
-			</div>
 			</c:if>
-			
+
 			<div class="panel panel-default">
 				<div id="header2" class="panel-heading" data-toggle="collapse"
 					data-target="#sub2" data-parent="#panelContainer">
+<<<<<<< HEAD
 				<!-- 	<i class="glyphicon glyphicon-leaf"></i> -->
 					<i class="iconfont icon-user"></i>
 					 <a href="#">用户中心</a> 
 					 <span class="iconfont icon-arrow-right pull-right"></span>
+=======
+					<!-- 	<i class="glyphicon glyphicon-leaf"></i> -->
+					<i class="iconfont icon-user"></i> <a href="#">用户中心</a> <span
+						class="iconfont icon-arrow-right pull-right"></span>
+>>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 				</div>
 				<div id="sub2" class="collapse panel-collapse">
 					<div class="panel-body">
 						<ul class="nav">
+<<<<<<< HEAD
 							<li><a href="../user/list" target="body"><span class="iconfont icon-list"></span>用户列表</a></li>
+=======
+							<c:if test="${userType == 1 }">
+								<li><a href="../user/list" target="body"><span
+										class="iconfont icon-list"></span>用户列表</a></li>
+							</c:if>
+							<c:if test="${userType == 2 }">
+							<li><a href="../user/personal" target="body"><span
+										class="iconfont icon-list"></span>个人中心</a></li>
+							</c:if>
+>>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 						</ul>
 					</div>
 				</div>
@@ -163,35 +215,76 @@ a, a:hover, a:focus {
 			<div class="panel panel-default">
 				<div id="header3" class="panel-heading" data-toggle="collapse"
 					data-target="#sub3" data-parent="#panelContainer">
+<<<<<<< HEAD
 					<i class="iconfont icon-list"></i> <a href="#">日记管理</a>
 					<span class="iconfont icon-arrow-right pull-right"></span>
+=======
+					<i class="iconfont icon-diary"></i> <a href="#">日记管理</a> <span
+						class="iconfont icon-arrow-right pull-right"></span>
+>>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 				</div>
 				<div id="sub3" class="collapse panel-collapse">
 					<div class="panel-body">
 						<ul class="nav">
+<<<<<<< HEAD
 							<li><a href="#"><span class="iconfont icon-list"></span>日记列表</a></li>
 							<li><a href="../diary/w_diary" target="body"><span class="iconfont icon-list"></span>写日记</a></li>
+=======
+							<li><a href="../diary/list" target="body"><span class="iconfont icon-list"></span> 日记列表</a></li>
+>>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 							<li><a href="#">添加栏目3</a></li>
+							<c:if test="${userType == 2 }">
+							     <li><a href="../diary/w_diary" target="body"><span class="iconfont icon-write"></span> 写日记</a></li>
+							</c:if>
+						    <!--  
+							<li><a href="../diaryType/list" target="body"><span class="iconfont icon-category"></span>日记类型</a></li>
+						     -->
 							<li><a href="#">添加栏目4</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 			
+			<c:if test="${userType == 1 }">
 			<div class="panel panel-default">
-				<div id="header2" class="panel-heading" data-toggle="collapse"
+				<div id="header3" class="panel-heading" data-toggle="collapse"
 					data-target="#sub4" data-parent="#panelContainer">
+<<<<<<< HEAD
 					<!-- <i class="glyphicon glyphicon-leaf"></i>  -->
 					<i class="iconfont icon-settings"></i>
 					<a href="#">系统管理</a> <span
+=======
+					<i class="iconfont icon-category"></i> <a href="#">日记类别管理</a> <span
+>>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 						class="iconfont icon-arrow-right pull-right"></span>
 				</div>
 				<div id="sub4" class="collapse panel-collapse">
 					<div class="panel-body">
 						<ul class="nav">
+<<<<<<< HEAD
 							<li>
 							  <a href="#" onclick="logout()"><span class="iconfont icon-login-out"></span>退出登陆</a>
 							</li>
+=======
+							<li><a href="../diaryType/list" target="body"><span class="iconfont icon-list"></span>日记类型列表</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+            </c:if>
+			<div class="panel panel-default">
+				<div id="header2" class="panel-heading" data-toggle="collapse"
+					data-target="#sub5" data-parent="#panelContainer">
+					<!-- <i class="glyphicon glyphicon-leaf"></i>  -->
+					<i class="iconfont icon-settings"></i> <a href="#">系统管理</a> <span
+						class="iconfont icon-arrow-right pull-right"></span>
+				</div>
+				<div id="sub5" class="collapse panel-collapse">
+					<div class="panel-body">
+						<ul class="nav">
+							<li><a href="#" onclick="logout()"><span
+									class="iconfont icon-login-out"></span>退出登陆</a></li>
+>>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 						</ul>
 					</div>
 				</div>
@@ -239,8 +332,8 @@ a, a:hover, a:focus {
 		});
 		
 		function logout(){  
-		    parent.window.location = "<%=request.getContextPath()%>/system/login_out";  
-		} 
+		    parent.window.location = "<%=request.getContextPath()%>/system/login_out";
+		}
 	</script>
 </body>
 </html>

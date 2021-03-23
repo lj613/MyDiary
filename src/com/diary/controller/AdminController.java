@@ -60,7 +60,7 @@ public class AdminController {
 	@ResponseBody
 	// @ResponseBody自动把返回的对象转换为json字符串 @ResponseBody使用需要jackson包
 	public Msg getUsersWithJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
-		System.out.println("调用用户列表获取方法hhhhhhhhhhhhhhhhhh");
+		//System.out.println("调用用户列表获取方法");
 		// 使用分页插件 传入页码和每页的大小
 		PageHelper.startPage(pn, 10);
 		List<Admin> adminList = adminService.findList();
@@ -83,8 +83,13 @@ public class AdminController {
 	public Msg adminSearch(@RequestParam(value = "pn", defaultValue = "1") Integer pn, 
 			Model model,
 			@PathVariable("keywords") String keywords) {
+<<<<<<< HEAD
 		System.out.println("调用搜索方法keywords为：" + keywords);
 		System.out.println(keywords);		
+=======
+		//System.out.println("调用搜索方法keywords为：" + keywords);
+		//System.out.println(keywords);		
+>>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 		// 使用分页插件 传入页码和每页的大小
 		PageHelper.startPage(pn, 10);
 		//模糊查询
@@ -146,7 +151,7 @@ public class AdminController {
 	 @RequestMapping(value="/edit/{id}",method=RequestMethod.POST)
 	 @ResponseBody 
 	 public Msg edit(Admin admin) {
-		 System.out.println("将要更新的数据："+admin);
+		// System.out.println("将要更新的数据："+admin);
 		 adminService.edit(admin);
 		 return Msg.success();
 	 }
@@ -159,7 +164,7 @@ public class AdminController {
 	 @RequestMapping(value="/delete/{ids}",method=RequestMethod.POST)
 	 @ResponseBody 
 	 public Msg deleteById(@PathVariable("ids") String ids) {
-		 System.out.println("选中的所有id:"+ ids);
+		 //System.out.println("选中的所有id:"+ ids);
 		 if(ids.contains("-")) {
 			 //批量删除
 			 String idsString = "";
@@ -170,7 +175,7 @@ public class AdminController {
 			  }
 			//去除最后一个逗号
 			idsString = idsString.substring(0,idsString.length()-1);
-			System.out.println("重新组装好的id字符串：" + idsString);
+			//System.out.println("重新组装好的id字符串：" + idsString);
 			if(adminService.deleteAll(idsString)<=0) {
 				 return Msg.fail(); 
 			}

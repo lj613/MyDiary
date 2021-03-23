@@ -196,17 +196,17 @@
             <form id="form">
                 <!-- 输入框部分 -->
                 <div class="input-box">
-                    <input type="text" class="" name="username" id="username" required="">
+                    <input type="text" class="" name="username" id="username" required="" autoComplete="off">
                     <label>用户名</label>
                 </div>
                 <div class="input-box">
-                    <input type="password" class="" name="password" id="password" placeholder="" required="">
+                    <input type="password" class="" name="password" id="password" placeholder="" required="" autoComplete="off">
                     <label>密码</label>
                 </div>
                   <!-- 验证码部分 -->
                 <div class="vcode-box row">
                     <div class="input-box col-md-6">
-                        <input type="text" class="" name="vcode" id="" required="">
+                        <input type="text" class="" name="vcode" id="" required="" autoComplete="off">
                         <label>验证码</label>
                     </div>
                     <div class="col-md-6">

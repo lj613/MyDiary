@@ -23,8 +23,17 @@ html,body{
           <!--  <frameset  id="body"> -->
           <frameset  id="body" cols="250,*"  >
                <frame noresize="noresize" name="leftFrame" id ="leftFrame" src="../system/left" scrolling="no" />
+<<<<<<< HEAD
                <frame noresize="noresize" name="body" id="body"  src="../system/welcome"  scrolling="yes"/>
+=======
+>>>>>>> branch 'master' of https://github.com/lj613/MyDiary
                
+               <c:if test="${userType == 1 }">
+               <frame noresize="noresize" name="body" id="body"  src="../system/welcome1"  scrolling="yes"/>
+               </c:if>
+                <c:if test="${userType == 2 }">
+               <frame noresize="noresize" name="body" id="body"  src="../system/welcome2"  scrolling="yes"/>
+                </c:if>
               <!--   <frame name="rightFrame" src="rightFrame.html"/>  src="mainFrame.html"-->
           </frameset>
           <frame noresize="noresize" name="bottomFrame" id ="homebottom" src="../system/bottom" scrolling="no"/>

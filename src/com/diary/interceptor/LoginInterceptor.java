@@ -41,12 +41,12 @@ public class LoginInterceptor  implements HandlerInterceptor{
 		// TODO Auto-generated method stub
 		String url = request.getRequestURI();
 		
-		System.out.println("进入拦截器url = " + url);
+		//System.out.println("进入拦截器url = " + url);
 		Object user = request.getSession().getAttribute("user");
-		System.out.println(user);
+		//System.out.println(user);
 		if(user == null){
 			//表示未登陆或者登陆状态失效
-			System.out.println("未登录或登陆失效= " + url);
+			//System.out.println("未登录或登陆失效= " + url);
 			/* request.getContextPath() 获取网站根目录 */
 			response.sendRedirect(request.getContextPath() + "/system/login");
 			/*

@@ -41,11 +41,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.findById(id);
 	}
 	
-	
-	
-	  // @Override
-	  public int edit(User user){ 
-		  // TODO Auto-generated method stub
+	// @Override
+	public int edit(User user){ 
+	  // TODO Auto-generated method stub
 	     return userDao.edit(user);
 	  }
 	  
@@ -57,5 +55,7 @@ public class UserServiceImpl implements UserService {
 		  return userDao.deleteAll(ids);
 	  }
 	  
-
+	  public int getNumBySex(String sex) {
+		  return userDao.getNumBySex(sex);
+	  }
 }
