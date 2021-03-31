@@ -326,7 +326,7 @@ body {
 	        })
 	    }
 	    
-	  //格式化时间函数
+	    //格式化时间函数
 	    Date.prototype.Format = function (fmt) { // author: meizz
 	        var o = {
 	            "M+": this.getMonth() + 1, // 月份
@@ -419,18 +419,7 @@ body {
 	                        shadowOffsetX: 0,
 	                        shadowColor: 'rgba(0, 0, 0, 0.5)'
 	                    },
-	                   /*  normal:{
-	                        color:function(params) {
-	                            //自定义颜色
-	                            var colorList = colorList;
-	                            
-	                           //  var colorList = [          
-	                              //      'skyblue', 'pink',"plum","orange"
-	                              //  ]; 
-	                                return colorList[params.dataIndex]
-	                        }
-	                    } */
-
+	             
 	                }
 	            }
 	        ]

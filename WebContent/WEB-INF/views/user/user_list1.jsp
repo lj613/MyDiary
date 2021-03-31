@@ -201,10 +201,7 @@
 						style="max-width: 150px; max-height: 150px;" title="照片"
 						src="#" />
 			</div>	
-			<div class="rl">
-				<div class="layui-inline" id="test"></div>
-				查询日记：<input id="test">
-			</div>			
+					
 		</div>
 	</div>
 </div>
