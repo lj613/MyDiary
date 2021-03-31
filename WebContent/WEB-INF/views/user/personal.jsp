@@ -105,8 +105,8 @@ margin-left:30px;
 				<div class="col-sm-7">
 					<!--  name 与实体类中的名字一致 -->
 					<input type="text" class="form-control" id="username_edit_input"
-						name="username" placeholder="请输入用户名" autoComplete="off"> <span
-						class="help-block"></span>
+						name="username" placeholder="请输入用户名" autoComplete="off"> 
+						<span class="help-block"></span>
 
 				</div>
 			</div>
@@ -373,6 +373,7 @@ margin-left:30px;
 					/* $("#editUserModal").modal('hide'); */
 					
 					getUser(userId);
+					window.parent.frames["topFrame"].location.reload(); //成功修改后刷新顶部，让用户图片也刷新
 				}
 			})
 
@@ -417,9 +418,11 @@ margin-left:30px;
 				$("#edit_photo").val(data.datalist.src);
 			} else if (data.code == 200) {
 				//上传失败
+				/* print(data.datalist.errMsg ); */
 				if (data.datalist.errMsg != null) {
-					show_validate_msg("#photo-upload-btn", "error",
-							data.datalist.errMsg);
+					show_validate_msg("#edit-upload-btn", "error",
+							data.datalist.errMsg);  //dit-upload-photo   photo-upload-btn
+					/* return Msg.fail().add("errMsg", "文件格式不正确，请上传jpg,png,gif,jpeg格式的图片！"); */
 				}
 			}
 		}

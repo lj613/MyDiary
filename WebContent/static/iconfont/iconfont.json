@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "3887020",
+      "name": "日记本 diary",
+      "font_class": "-top-diary2",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "7466500",
+      "name": "书本、标签、记录",
+      "font_class": "top-diary",
+      "unicode": "e691",
+      "unicode_decimal": 59025
+    },
+    {
       "icon_id": "689261",
       "name": "类目 品类 分类 类别.2",
       "font_class": "category",

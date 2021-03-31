@@ -268,12 +268,12 @@ public class UserController {
 				photo.getOriginalFilename().length());
 		if (!"jpg,png,gif,jpeg".contains(suffix.toLowerCase())) {
 			// 图片格式不正确
-			System.out.println("图片格式不正确");
+			/* System.out.println("图片格式不正确"); */
 			return Msg.fail().add("errMsg", "文件格式不正确，请上传jpg,png,gif,jpeg格式的图片！");
 		}
 		String savePath = request.getServletContext().getRealPath("/") + "\\upload\\";
-		System.out.println("图片上传到的根路径"+request.getServletContext().getRealPath("/"));
-		System.out.println("图片保存的位置"+savePath);
+//		System.out.println("图片上传到的根路径"+request.getServletContext().getRealPath("/"));
+//		System.out.println("图片保存的位置"+savePath);
 
 		File savePathFile = new File(savePath);
 		if (!savePathFile.exists()) {

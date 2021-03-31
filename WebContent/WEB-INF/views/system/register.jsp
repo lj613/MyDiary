@@ -38,7 +38,7 @@
         }
 
         body {
-            background: url("../static/images/login_bg.jpg");
+            background: url("../static/images/register.jpg");
         }
 
         /* 登陆框 */

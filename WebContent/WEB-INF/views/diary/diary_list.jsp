@@ -217,9 +217,14 @@ text-overflow: -o-ellipsis-lastline;
 								.append("删除");
 								//为删除按钮添加一个自定义属性，表示当前删除管理员id
 								delBtn.attr("del-id", diary.id);
-								
-								var btnTd = $("<td></td>").append(editBtn)
-								.append(delBtn);
+								if(${userType == 1}){
+									//管理员登陆不能编辑普通用户的日记信息
+									var btnTd = $("<td></td>").append(delBtn);
+								}else{
+									//普通用户可以编辑，删除日记信息
+									var btnTd = $("<td></td>").append(editBtn)
+									.append(delBtn);
+								}
 								
 								$("<tr></tr>").append(checkboxTd).append(
 										diaryIdTd).append(titleTd).append(
