@@ -83,13 +83,8 @@ public class AdminController {
 	public Msg adminSearch(@RequestParam(value = "pn", defaultValue = "1") Integer pn, 
 			Model model,
 			@PathVariable("keywords") String keywords) {
-<<<<<<< HEAD
-		System.out.println("调用搜索方法keywords为：" + keywords);
-		System.out.println(keywords);		
-=======
 		//System.out.println("调用搜索方法keywords为：" + keywords);
 		//System.out.println(keywords);		
->>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 		// 使用分页插件 传入页码和每页的大小
 		PageHelper.startPage(pn, 10);
 		//模糊查询

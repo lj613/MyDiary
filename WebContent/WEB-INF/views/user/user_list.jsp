@@ -74,11 +74,7 @@ html {
 				</div>
 			</c:if>
 		</div>
-<<<<<<< HEAD
-		<div class="sp_search" style="margin-top:5px">
-=======
 		<div class="sp_search" style="margin-top: 5px">
->>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 			<input type="text" placeholder="请输入用户名" name="keywords"
 				id="search_words" value="">
 			<button type="button" class="btn btn-success" id="search_btn">
@@ -308,12 +304,8 @@ html {
 		</div>
 	</div>
 	<!-- 提交表单处理iframe框架 -->
-<<<<<<< HEAD
-<iframe id="photo_target" name="photo_target" onload="uploaded(this)" style="display: none" ></iframe>    
-=======
 	<iframe id="photo_target" name="photo_target" onload="uploaded(this)"
 		style="display: none"></iframe>
->>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 
 	<script type="text/javascript">
 		//全局变量 保存表格中数据的总记录数,当前页数
@@ -609,10 +601,6 @@ html {
 			console.log("修改窗口密码框失去焦点")
 			//密码校验
 			var password = $(ele).val();
-<<<<<<< HEAD
-			/* alert(password); */
-=======
->>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 			var regPassword = /^[a-zA-Z0-9_-]{5,18}$/;
 			if (!regPassword.test(password)) {
 				valiFlag = false;

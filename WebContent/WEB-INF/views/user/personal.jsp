@@ -28,14 +28,18 @@
 <script type="text/javascript" src="../static/js/validateExtends.js"></script>
 
 <style type="text/css">
+body{
+	display:flex;
+	justify-content:center;
+}
 .main {
-	margin: 20px;
+	margin: 5px;
 	width: 100%;
 	height: 100%
 }
 
 .personTitle {
-	padding: 10px 20px;
+	padding: 5px 20px;
 	height: 54px;
 	background-color: #f1f9fc;
 	border-top: 1px solid #e0eaef;
@@ -50,8 +54,8 @@
 .persion_info {
 	border: 1px solid black;
 	background-color: #f1f9fc;
-	margin-top: 20px;
-	padding: 20px 30px;
+	margin-top: 10px;
+	padding: 10px 30px;
 	width: 100%;
 	height: 100%;
 }
@@ -67,8 +71,8 @@ margin-left:30px;
   <div class="main">
 	
 	 <!-- 标题部分 -->
-	<div class="personTitle">
-		<h2>个人中心</h2>
+	<div >
+		<h2>编辑资料</h2>
 	</div>
 	
 	<!-- 个人信息部分 -->
@@ -80,7 +84,7 @@ margin-left:30px;
 			<div class="form-group">
 				<label for="edit_photo-preview" class="col-sm-1 control-label" style="min-width: 100px;">用户头像:</label>
 				<img class="col-sm-10" id="edit_photo-preview" alt="照片"
-					style="max-width: 200px; max-height: 200px;" title="照片"
+					style="max-width: 120px; max-height: 120px;" title="照片"
 					src="/MyDiary/photo/user.jpg" />
 			</div>
 			<div class="form-group row">
@@ -89,7 +93,6 @@ margin-left:30px;
 					<input type="file" id="edit-upload-photo" name="photo"
 						style="display: inline-block">
 					<button id="edit-upload-btn" class="btn btn-success btn-sm">上传图片</button>
-					<span class="help-block"></span>
 				</div>
 			</div>
 		</form>
@@ -105,8 +108,7 @@ margin-left:30px;
 				<div class="col-sm-7">
 					<!--  name 与实体类中的名字一致 -->
 					<input type="text" class="form-control" id="username_edit_input"
-						name="username" placeholder="请输入用户名" autoComplete="off"> <span
-						class="help-block"></span>
+						name="username" placeholder="请输入用户名" autoComplete="off"> 
 
 				</div>
 			</div>
@@ -115,7 +117,6 @@ margin-left:30px;
 				<div class="col-sm-7">
 					<input type="password" class="form-control"
 						id="password_edit_input" name="password" placeholder="请输入密码">
-					<span class="help-block"></span>
 				</div>
 			</div>
 			<div class="form-group">

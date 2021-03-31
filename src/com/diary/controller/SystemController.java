@@ -30,12 +30,9 @@ import com.diary.service.DiaryTypeService;
 import com.diary.service.UserService;
 import com.diary.util.CpachaUtil;
 import com.diary.util.StringUtil;
-<<<<<<< HEAD
-=======
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
->>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 
 /**
  * 
@@ -107,11 +104,7 @@ public class SystemController {
 	// 后台首页顶部部分
 	@RequestMapping(value = "/top", method = RequestMethod.GET)
 	public ModelAndView top(ModelAndView model) {
-<<<<<<< HEAD
-		System.out.println("top加载");
-=======
 		//System.out.println("top加载");
->>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 		model.setViewName("system/top");
 		return model;
 	}
@@ -119,20 +112,8 @@ public class SystemController {
 	// 后台首页底部部分
 	@RequestMapping(value = "/bottom", method = RequestMethod.GET)
 	public ModelAndView bottom(ModelAndView model) {
-<<<<<<< HEAD
-		System.out.println("bottom加载");
-		model.setViewName("system/bottom");
-		return model;
-	}
-
-	// 后台首页欢迎页面部分
-	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
-	public ModelAndView welcome(ModelAndView model) {
-		model.setViewName("system/welcome");
-=======
 		//System.out.println("bottom加载");
 		model.setViewName("system/bottom");
->>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 		return model;
 	}
 
@@ -429,7 +410,7 @@ public class SystemController {
 		   for(int i=0;i<diaryTypeList.size();i++) {
 			   JSONObject DataNode  = new JSONObject();
 			   //获取日记类别id
-			   Long diaryTypeId = diaryTypeList.get(i).getDiaryTypeId();
+			   Long diaryTypeId = (long) diaryTypeList.get(i).getDiaryTypeId();
 			   //获取日记类别名称
 			   String typeName= diaryTypeList.get(i).getTypeName();
 			   DiaryTypeMap.put("userId",userId);

@@ -51,6 +51,11 @@ public class UserController {
 		model.setViewName("user/user_list");
 		return model;
 	}
+	@RequestMapping(value = "/user_list1", method = RequestMethod.GET)
+	public ModelAndView user_list(ModelAndView model) {
+		model.setViewName("user/user_list1");
+		return model;
+	}
 	
 	@RequestMapping(value = "/personal", method = RequestMethod.GET)
 	public ModelAndView personal(ModelAndView model) {
@@ -274,6 +279,7 @@ public class UserController {
 		String savePath = request.getServletContext().getRealPath("/") + "\\upload\\";
 		System.out.println("图片上传到的根路径"+request.getServletContext().getRealPath("/"));
 		System.out.println("图片保存的位置"+savePath);
+		request.getSession().setAttribute("url", savePath);
 
 		File savePathFile = new File(savePath);
 		if (!savePathFile.exists()) {

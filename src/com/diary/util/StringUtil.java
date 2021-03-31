@@ -37,22 +37,6 @@ public class StringUtil {
 	public static String generateUn(String prefix,String suffix){
 		return prefix + new Date().getTime() + suffix;
 	}
-<<<<<<< HEAD
-	public static boolean isEmpty(String str){
-		if("".equals(str)|| str==null){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	
-	public static boolean isNotEmpty(String str){
-		if(!"".equals(str)&&str!=null){
-			return true;
-		}else{
-			return false;
-		}
-=======
 	
 	
 	/**
@@ -75,6 +59,11 @@ public class StringUtil {
 			return true;
 		}
 		return false;
->>>>>>> branch 'master' of https://github.com/lj613/MyDiary
+	}
+
+
+	public static boolean isEmpty(String str) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

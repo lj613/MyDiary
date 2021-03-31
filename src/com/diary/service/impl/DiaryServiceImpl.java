@@ -38,6 +38,10 @@ public class DiaryServiceImpl implements DiaryService {
 	public List<Diary> findList() {
 		return diaryDao.findList();
 	}
+	@Override
+	public List<Diary> findSD(Map<String,Object> map) {
+		return diaryDao.findSD(map);
+	}
 
 	//带参数查询日记列表
 	@Override

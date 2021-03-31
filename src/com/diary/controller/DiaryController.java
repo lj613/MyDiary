@@ -1,22 +1,5 @@
 package com.diary.controller;
 
-<<<<<<< HEAD
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-
-@RequestMapping("/diary")
-@Controller
-public class DiaryController {
-   
-	@RequestMapping(value = "/w_diary", method = RequestMethod.GET)
-	public ModelAndView list(ModelAndView model) {
-		model.setViewName("diary/w_diary");
-		return model;
-	}
-
-=======
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -152,8 +135,22 @@ public class DiaryController {
 		// 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面
 		// 传入连续显示的页数5
 		PageInfo pageInfo = new PageInfo(diaryList, 5);
-
 		return Msg.success().add("pageInfo", pageInfo);
+
+	}
+	@RequestMapping("/getList")
+	@ResponseBody
+	// @ResponseBody自动把返回的对象转换为json字符串 @ResponseBody使用需要jackson包
+	public Msg getList(HttpServletRequest request) {
+		Map<String, Object> map = new HashMap();
+		List<Diary> diaryList = new ArrayList();
+		User loginedUser = (User) request.getSession().getAttribute("user");
+		Long userId = loginedUser.getId();
+		System.out.println("hhh"+userId);
+		map.put("userId",userId);
+		diaryList = diaryService.findSD(map);
+		System.out.println("aaaaa"+diaryList);
+		  return Msg.success().add("diary",diaryList);
 
 	}
 	
@@ -325,7 +322,7 @@ public class DiaryController {
 		   for(int i=0;i<diaryTypeList.size();i++) {
 			   JSONObject DataNode  = new JSONObject();
 			   //获取日记类别id
-			   Long diaryTypeId = diaryTypeList.get(i).getDiaryTypeId();
+			   Long diaryTypeId = (long) diaryTypeList.get(i).getDiaryTypeId();
 			   //获取日记类别名称
 			   String typeName= diaryTypeList.get(i).getTypeName();
 			   DiaryTypeMap.put("userId",userId);
@@ -367,5 +364,4 @@ public class DiaryController {
 		 */
 	 }
  
->>>>>>> branch 'master' of https://github.com/lj613/MyDiary
 }

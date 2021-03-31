@@ -65,6 +65,22 @@
   	<select id="findById" parameterType="Integer" resultMap="DiaryResult">
   		select * from diary where id = #{id}
   	</select>
+  	
+  	<select id="findSD" parameterType="Map" resultMap="DiaryResult">
+  		select * from diary 
+		<where>
+		  DATE_SUB(CURDATE(), INTERVAL 30 DAY) <![CDATA[<=]]> DATE(releaseDate)
+  		<if test="userId != null and userId != '' ">
+  	             and userId = #{userId}
+  	     </if>
+  	     </where>
+  		order by releaseDate desc limit 5		
+  	</select>
+  	
+  	<select id="findByTime" parameterType="date" resultMap="DiaryResult">
+  		select * from diary where releaseDate = #{releaseDate}
+  	</select>
+  	
   	<insert id="add" parameterType="Diary" useGeneratedKeys ="true" keyProperty="id">
   	insert into diary(id,title,content,typeId,releaseDate,userId) values(null,#{title},#{content},#{diaryType.diaryTypeId},now(),#{user.id})
   		<!-- insert into diary(id,title,content,typeId,releaseDate,userId) values(null,#{title},#{content},#{diaryTypeId},now(),#{user.id}) -->
