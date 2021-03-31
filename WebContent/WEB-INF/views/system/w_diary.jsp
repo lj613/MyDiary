@@ -13,6 +13,7 @@
 <script src="/jsp_diary/bootstrap/js/bootstrap.js"></script>
 <script src="/jsp_diary/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
+
 	function checkForm(){
 		var title=document.getElementById("title").value;
 		var content=CKEDITOR.instances.content.getData();

@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="https://www.layuicdn.com/layui-v2.5.5/css/layui.css" media="all">
 <script src="https://www.layuicdn.com/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <style type="text/css">
+
 .main {
 	margin: 20px;
 	width: 100%;

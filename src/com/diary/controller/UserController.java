@@ -39,7 +39,6 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-
 	/**
 	 * 用户列表页
 	 * 

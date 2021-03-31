@@ -77,10 +77,6 @@
   		order by releaseDate desc limit 5		
   	</select>
   	
-  	<select id="findByTime" parameterType="date" resultMap="DiaryResult">
-  		select * from diary where releaseDate = #{releaseDate}
-  	</select>
-  	
   	<insert id="add" parameterType="Diary" useGeneratedKeys ="true" keyProperty="id">
   	insert into diary(id,title,content,typeId,releaseDate,userId) values(null,#{title},#{content},#{diaryType.diaryTypeId},now(),#{user.id})
   		<!-- insert into diary(id,title,content,typeId,releaseDate,userId) values(null,#{title},#{content},#{diaryTypeId},now(),#{user.id}) -->

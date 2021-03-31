@@ -44,6 +44,7 @@ public class DiaryController {
 	@Resource
 	private DiaryTypeService diaryTypeService; 
 
+	
 	/**
 	 * 写日记页面
 	 * 

@@ -5,6 +5,7 @@ public class DiaryType {
 	private String typeName;
 	private int diaryCount;
 	
+	
 	public DiaryType() {
 		super();
 	}

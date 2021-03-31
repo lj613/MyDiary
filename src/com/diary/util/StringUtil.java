@@ -9,7 +9,6 @@ import java.util.List;
  *
  */
 public class StringUtil {
-	
 	/**
 	 * 将给定的list按照指定的分隔符分割成字符串返回
 	 * @param list

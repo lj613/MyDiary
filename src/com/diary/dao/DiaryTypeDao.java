@@ -24,5 +24,4 @@ public interface DiaryTypeDao {
 	public int deleteById(Integer diaryTypeId);
 	public int deleteAll(String ids);
 	
-	 
 }

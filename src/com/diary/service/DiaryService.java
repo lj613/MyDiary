@@ -41,7 +41,4 @@ public interface DiaryService {
 	//批量删除日记
 	public int deleteAll(String ids);
 
-	
-	
-
 }

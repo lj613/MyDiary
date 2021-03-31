@@ -17,7 +17,6 @@ public class DiaryServiceImpl implements DiaryService {
 
 	@Resource
 	private DiaryDao diaryDao;
-	
 	// @Override
 	/*
 	 * public DiaryType findByTypeName(String typeName) { // TODO Auto-generated

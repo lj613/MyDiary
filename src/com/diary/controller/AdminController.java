@@ -37,6 +37,7 @@ public class AdminController {
 	@Autowired
 	public AdminService adminService;
 
+	
 	/**
 	 * 管理员列表页
 	 * 
