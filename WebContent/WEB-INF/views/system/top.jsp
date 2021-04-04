@@ -64,7 +64,7 @@ a {
 	
 }
 
-.icon--top-diary2 {
+.icon-top-diary2 {
 	margin-left: 10px;
 	font-size: 24px;
 }
@@ -74,7 +74,7 @@ a {
 <body>
 	<form id="homeheader" runat="server">
 		<div class="top">
-			<span class="icon--top-diary2"> 
+			<span class="icon-top-diary2"> 
 			<svg class="icon" aria-hidden="true"> 
 			    <use xlink:href="#icon--top-diary2"></use>
 			</svg>
@@ -95,7 +95,6 @@ a {
 					&nbsp;&nbsp;&nbsp;<span class="iconfont icon-login-out"></span><a
 						href="#" id="loginOut" onclick="logout()">安全退出</a>
 				</div>
-
 			</div>
 		</div>
 	</form>
@@ -104,7 +103,7 @@ a {
 	
 	 $(function () {
 	        /* 页面加载完成后，直接发送一个ajax请求 获取分页数据  显示数据列表的首页*/
-	        weather();
+	        /* weather(); */
 	        //设置时间
 	        var time = new Date().Format("yyyy-MM-dd hh:mm:ss");
 	        $(".date").html(time);

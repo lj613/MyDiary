@@ -16,6 +16,9 @@
 	href="../static/css/user/user_list.css">
 <link href="../static/css/bootstrap.min.css" rel="stylesheet">
 <link href="../static/css/bootstrapValidator.min.css" rel="stylesheet" />
+<link
+	href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet">
 <script src="../static/js/jquery-3.4.1.min.js"></script>
 <script src="../static/js/bootstrap.min.js"></script>
 <script src="../static/js/bootstrapValidator.min.js"></script>
@@ -26,6 +29,12 @@
 <!-- <script type="text/javascript" src="../static/js/jquery.min.js"></script> -->
 <script type="text/javascript" src="../static/js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../static/js/validateExtends.js"></script>
+<!-- 确认取消弹出框 -->
+<script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
+<script
+	src="https://cdn.bootcss.com/moment.js/2.22.0/moment-with-locales.js"></script>
+<script
+	src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
 <style type="text/css">
 html {
@@ -38,10 +47,9 @@ html {
      overflow: hidden;
      text-overflow: ellipsis;
 } */
-
- .diary_content {
+.diary_content {
 	max-width: 640px;
-} 
+}
 /* .diary_content {
 	max-width: 640px;
 	white-space: nowrap;
@@ -62,6 +70,40 @@ text-overflow: -o-ellipsis-lastline;
 .diary_title {
 	text-align: center;
 	line-height: 1;
+}
+
+.date_select {
+	width: 500px;
+	height: 50px;
+	/* border: 1px solid pink; */
+	display: flex;
+}
+
+.tip_text {
+	height: 36px;
+	/* border: 1px solid plum; */
+	line-height: 36px;
+	font-size: 16px;
+}
+
+#datetimepicker1 {
+	margin-left: 10px;
+	margin-right: 10px;
+	height: 36px;
+}
+
+#search_btn {
+	height: 40px;
+}
+
+#search_btn2 {
+	width: 60px;
+	height: 36px;
+}
+/* 去掉button的边框 */
+.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus,
+	.btn.active.focus {
+	outline: none;
 }
 </style>
 </head>
@@ -88,15 +130,51 @@ text-overflow: -o-ellipsis-lastline;
 					<span class="glyphicon glyphicon-remove"></span> 批量删除
 				</button>
 			</div>
-			<div class="sp_search">
+
+			<!-- 按日记发布日期搜索 -->
+
+			<div class="date_select col-md-3">
+				<div class="tip_text">按日期查询:</div>
+				<div class="input-group" id='datetimepicker1'>
+					<input type='text' class="form-control " id="search_time" /> <span
+						class="input-group-addon"> <span
+						class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+				<button class="btn btn-primary btn-success" id="search_btn2">查询</button>
+			</div>
+
+			<!-- 按日记标题搜索 -->
+			<div class="sp_search ">
 				<!--   实现点击回车执行搜索功能 -->
 				<input type="text" placeholder="请输入日记标题" name="keywords"
 					id="search_words" value=""
 					onkeydown="if(event.keyCode==13)searchDiary()">
 				<button type="button" class="btn btn-success" id="search_btn">
-					<span class="glyphicon glyphicon-search"></span> 搜索
+					<span class="glyphicon glyphicon-search"></span> 查询
 				</button>
 			</div>
+
+
+			<!-- 	<div class="row">
+				<div class='col-sm-6'>
+					<div class="form-group">
+						<label>选择查询时间：</label>
+						指定 date标记
+						<div class='input-group date' id='datetimepicker1'>
+							<input type='text' class="form-control " id="search_time" /> <span
+								class="input-group-addon"> <span
+								class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div>
+					<button class="btn btn-primary" id="search_btn2">查询</button>
+				</div>
+			</div>  -->
+
+
 		</div>
 
 		<div class="show">
@@ -139,7 +217,20 @@ text-overflow: -o-ellipsis-lastline;
 		$(function() {
 			/* 页面加载完成后，直接发送一个ajax请求 获取分页数据  显示数据列表的首页*/
 			to_page(1); 
+			 $('#datetimepicker1').datetimepicker({
+	                format: 'YYYY-MM-DD',
+	                locale: moment.locale('zh-cn'),
+	               /*  defaultDate: "1990-1-1"  */
+	                 defaultDate: new Date(),//初始化当前日期 
+	            });
 		});
+		
+		 $("#search_btn2").click(function () {
+	            var keywords = $("#search_time").val();
+	            console.log("选择的时间" + keywords);
+	            searchDiaryBydate();
+	            // searchDiary();
+	        });
 
 		//页面跳转
 		function to_page(pn) {
@@ -352,8 +443,44 @@ text-overflow: -o-ellipsis-lastline;
 			//1.弹出是否确认删除对话框
 			var title = $(this).parents("tr").find("td:eq(2)").text(); //要删除的日记标题
 			var id = $(this).attr("del-id");
-			/* alert($(this).parents("tr").find("td:eq(2)").text()); */
-			if (confirm("确认删除【" + title + "】吗？")) {
+			/* 确认删除弹出框 */
+			 swal({
+                   title: "确认删除【" + title + "】这篇日记吗？",
+                   text: "一旦删除，您将无法恢复！",
+                   icon: "warning",
+                   buttons: true,
+                   dangerMode: true,
+               }).then((willDelete) => {
+                   if (willDelete) {
+                   	$.ajax({
+							url : "${APP_PATH}/diary/delete/" + id,
+							type : "POST",
+							success : function(result) {
+								/* alert(result.msg); */
+								if (result.code == 100) {
+									swal(result.msg, {
+			                            icon: "success",
+			                        });
+
+						} else if (result.code == 200) {
+							
+							swal(result.msg, {
+	                            icon: "warning",
+	                        });
+						}
+								
+								
+							}
+						})
+                   } else {
+                       swal("你取消了此操作！");
+                   }
+                    //回到当前页面
+					to_page(currentPage);
+                   
+               });
+			
+			 /* if (confirm("确认删除【" + title + "】吗？")) {
 				//确认，发送ajax请求删除
 				$.ajax({
 					url : "${APP_PATH}/diary/delete/" + id,
@@ -369,7 +496,7 @@ text-overflow: -o-ellipsis-lastline;
 						to_page(currentPage);
 					}
 				});
-			}
+			} */
 
 		});
 		
@@ -388,6 +515,27 @@ text-overflow: -o-ellipsis-lastline;
 					build_page_info(result);
 					//3.解析并显示分页条
 					build_page_nav(result);
+				}
+
+			}) 
+		}
+		
+	  //根据日记发布日期搜索日记 模糊查询
+	    function searchDiaryBydate(){
+	    	 /*  var keywords = $("#search_time").val(); */
+	    	var releaseDate = $("#search_time").val();
+			 //alert("点击了搜索按钮,keywords为：" + keywords);
+			$.ajax({
+				url : "${APP_PATH}/diary/search2/" + releaseDate,
+				type : "GET",
+				success : function(result) {
+					//  console.log(result);  //打印后台返回的数据 
+					//1.解析并显示日记数据
+				      build_diary_table(result);
+					//2.解析并显示分页信息
+					build_page_info(result);
+					//3.解析并显示分页条
+					build_page_nav(result); 
 				}
 
 			}) 
@@ -420,7 +568,7 @@ text-overflow: -o-ellipsis-lastline;
 						});
 
 		//点击全部删除，实现删除选中的所有
-		$("#diary_delete_all_btn").click(
+		/* $("#diary_delete_all_btn").click(
 				function() {
 					//要删除的所有日记id的组合
 					var del_idstr = "";
@@ -444,8 +592,67 @@ text-overflow: -o-ellipsis-lastline;
 							}
 						})
 					}
-				});
+				}); */
 		
+	     //点击全部删除，实现删除选中的所有
+		$("#diary_delete_all_btn").click(
+				function() {
+					//要删除的所有日记id的组合
+					var del_idstr = "";
+					$.each($(".check_item:checked"), function() {
+						//组装日记id字符串
+						del_idstr += $(this).parents("tr").find("td:eq(1)")
+								.text()
+								+ "-";
+					});
+					//去除最后一个“-”符号
+					del_idstr = del_idstr.substring(0, del_idstr.length - 1);
+			        /*  当选择的要删除的数据为空，给出提示 */
+					if(del_idstr.length <= 0){
+						swal("请选择要删除的数据", {
+                            icon: "warning",
+                        });
+						return ;
+					}
+					/* 确认删除弹出框 */
+					 swal({
+		                    title: "确认删除所有选中的日记吗？",
+		                    text: "一旦删除，您将无法恢复！",
+		                    icon: "warning",
+		                    buttons: true,
+		                    dangerMode: true,
+		                   
+		                }).then(function(willDelete){
+		                    if (willDelete) {
+		                    	$.ajax({
+									url : "${APP_PATH}/diary/delete/" + del_idstr,
+									type : "POST",
+									success : function(result) {
+										/* alert(result.msg); */
+										swal(result.msg, {
+				                            icon: "success",
+				                        });
+										//回到当前页面
+										to_page(currentPage);
+									}
+								})
+		                    } else {
+		                        swal("你取消了此操作！");
+		                    }
+		                });
+					/* if (confirm("确认删除所有选中的日记吗？")) {
+						//发送ajax请求删除所有选中的日记
+						$.ajax({
+							url : "${APP_PATH}/diary/delete/" + del_idstr,
+							type : "POST",
+							success : function(result) {
+								alert(result.msg);
+								//回到当前页面
+								to_page(currentPage);
+							}
+						})
+					} */
+				});
 
 		//给编辑日记按钮绑定跳转到编辑页面的事件
 		$(document).on("click", ".edit_btn", function() {

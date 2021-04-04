@@ -27,6 +27,8 @@
 <link rel="stylesheet" type="text/css" href="../static/css/demo.css">
 
 <script type="text/javascript" src="../static/js/jquery.easyui.min.js"></script>
+<!-- 确认取消弹出框 -->
+<script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
 <!-- <script type="text/javascript" src="../static/js/jquery.min.js"></script> -->
 <script type="text/javascript" src="../static/js/validateExtends.js"></script>
 
@@ -48,6 +50,16 @@
 .form-control-feedback {
 	right: 16px;
 }
+
+#search_btn {
+	height: 40px;
+}
+
+/* 去掉button的边框 */
+.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus,
+	.btn.active.focus {
+	outline: none;
+}
 </style>
 </head>
 
@@ -68,7 +80,7 @@
 				</button>
 				<button type="button" class="btn btn-danger" data-toggle="modal"
 					id="user_delete_all_btn">
-					<span class="glyphicon glyphicon-remove"></span> 删除
+					<span class="glyphicon glyphicon-remove"></span> 批量删除
 				</button>
 			</div>
 			<div class="sp_search class="col-md-3"">
@@ -123,8 +135,8 @@
 							<div class="col-sm-7">
 								<!--  name 与实体类中的名字一致 -->
 								<input type="text" class="form-control" id="username_add_input"
-									name="username" placeholder="请输入用户名" autoComplete="off"> <span
-									class="help-block"></span>
+									name="username" placeholder="请输入用户名" autoComplete="off">
+								<span class="help-block"></span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -381,7 +393,7 @@
 
 		//点击添加弹出新增模态框  手动打开模态框
 		$("#user_add_btn").click(function() {
-			changeIndex(this);
+			/* changeIndex(this); */
 			//清空表单数据(表单完整重置(表单数据，表单样式))  jquery没有这个方法 所以取dom 对象
 			reset_form("#addUserModal .addForm");
 			$("#addUserModal").modal({
@@ -508,11 +520,44 @@
 			var username = $(this).parents("tr").find("td:eq(2)").text(); //要删除的管理员的名字
 			var id = $(this).attr("del-id");
 			/* alert($(this).parents("tr").find("td:eq(2)").text()); */
-			if (confirm("确认删除【" + username + "】吗？")) {
+			/* 确认删除弹出框 */
+			swal({
+				title : "确认删除【" + username + "】吗？",
+				text : "一旦删除，您将无法恢复！",
+				icon : "warning",
+				buttons : true,
+				dangerMode : true,
+			}).then(function(willDelete) {
+				if (willDelete) {
+					$.ajax({
+						url : "${APP_PATH}/admin/delete/" + id,
+						type : "POST",
+						success : function(result) {
+							if (result.code == 100) {
+								swal(result.msg, {
+									icon : "success",
+								});
+
+							} else if (result.code == 200) {
+								swal(result.msg, {
+									icon : "warning",
+								});
+							}
+
+						}
+					})
+				} else {
+					swal("你取消了此操作！");
+				}
+				//回到当前页面
+				to_page(currentPage);
+
+			});
+
+			/* if (confirm("确认删除【" + username + "】吗？")) {
 				//确认，发送ajax请求删除
 				$.ajax({
 					url : "${APP_PATH}/admin/delete/" + id,
-					/* url:"${APP_PATH}/admin/edit/"+$(this).attr("edit-id"),  */
 					type : "POST",
 					success : function(result) {
 						if (result.code == 100) {
@@ -526,11 +571,7 @@
 
 					}
 				});
-			}
-
-			/* $("#editUserModal").modal({
-				  backdrop:"static"
-			  }) */
+			} */
 		});
 
 		//实现全选，全不选功能
@@ -566,7 +607,15 @@
 					});
 					//去除最后一个“-”符号
 					del_idstr = del_idstr.substring(0, del_idstr.length - 1);
-					if (confirm("确认删除所有选中的用户吗？")) {
+					/*  当选择的要删除的数据为空，给出提示 */
+					if (del_idstr.length <= 0) {
+						swal("请选择要删除的数据", {
+							icon : "warning",
+						});
+						return;
+					}
+
+					/* if (confirm("确认删除所有选中的用户吗？")) {
 						//发送ajax请求删除所有选中的用户
 						$.ajax({
 							url : "${APP_PATH}/admin/delete/" + del_idstr,
@@ -577,12 +626,38 @@
 								to_page(currentPage);
 							}
 						})
-					}
+					} */
+					/* 确认删除弹出框 */
+					swal({
+						title : "确认删除所有选中的日记吗？",
+						text : "一旦删除，您将无法恢复！",
+						icon : "warning",
+						buttons : true,
+						dangerMode : true,
+
+					}).then(function(willDelete) {
+						if (willDelete) {
+							$.ajax({
+								url : "${APP_PATH}/admin/delete/" + del_idstr,
+								type : "POST",
+								success : function(result) {
+									/* alert(result.msg); */
+									swal(result.msg, {
+										icon : "success",
+									});
+									//回到当前页面
+									to_page(currentPage);
+								}
+							})
+						} else {
+							swal("你取消了此操作！");
+						}
+					});
 				});
 
 		//给修改按钮绑定修改模态框弹出事件
 		$(document).on("click", ".edit_btn", function() {
-			changeIndex(this);
+			/* changeIndex(this); */
 			//alert("edit");
 			//1.查出并显示对应用户信息
 			getAdmin($(this).attr("edit-id"));
@@ -635,7 +710,8 @@
 			});
 		}
 		//点击更新 更新管理员信息
-		$('#user_update_btn').click(
+		$('#user_update_btn')
+				.click(
 						function() {
 							//用户名校验
 							var username = $("#username_edit_input").val();

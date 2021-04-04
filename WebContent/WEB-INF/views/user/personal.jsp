@@ -23,10 +23,13 @@
 <link rel="stylesheet" type="text/css" href="../static/css/easyui.css">
 <link rel="stylesheet" type="text/css" href="../static/css/icon.css">
 <link rel="stylesheet" type="text/css" href="../static/css/demo.css">
+<!-- alert提示插件所需的样式文件 -->
+<link rel="stylesheet" type="text/css" href="../static/css/toastr.css">
 <!-- <script type="text/javascript" src="../static/js/jquery.min.js"></script> -->
 <script type="text/javascript" src="../static/js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../static/js/validateExtends.js"></script>
-
+<!-- alert提示插件所需的js文件 -->
+<script type="text/javascript" src="../static/js/toastr.min.js"></script>
 <style type="text/css">
 .main {
 	margin: 20px;
@@ -59,6 +62,15 @@
 #user_update_btn{
 margin-left:30px;
 }
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;          
+} 
 </style>
 </head>
 
@@ -81,7 +93,7 @@ margin-left:30px;
 				<label for="edit_photo-preview" class="col-sm-1 control-label" style="min-width: 100px;">用户头像:</label>
 				<img class="col-sm-10" id="edit_photo-preview" alt="照片"
 					style="max-width: 200px; max-height: 200px;" title="照片"
-					src="/MyDiary/photo/user.jpg" />
+					src="/MyDiary/photo/default_user.jpg" />
 			</div>
 			<div class="form-group row">
 				<label for="edit-upload-photo" class="col-sm-1 control-label" style="min-width: 100px;">修改头像:</label>
@@ -97,7 +109,7 @@ margin-left:30px;
 			<!--  隐藏域  在页面存储但不需要显示出来的值 -->
 			<div class="form-group">
 				<input id="edit_photo" type="hidden" name="photo"
-					value="/MyDiary/photo/user.jpg" />
+					value="/MyDiary/photo/default_user.jpg" />
 			</div>
 
 			<div class="form-group">
@@ -140,7 +152,7 @@ margin-left:30px;
 		</form>
 
        <!-- 保存按钮 -->
-		<button type="button" class="btn btn-info" id="user_update_btn">更新</button>
+		<button  class="btn btn-info" id="user_update_btn">更新</button>
 	</div>
 
 </div>
@@ -150,8 +162,12 @@ margin-left:30px;
 		style="display: none"> </iframe>
 
 	<script type="text/javascript">
+	  /* 设置提示框弹出的位置 */
+	 toastr.options.positionClass = 'toast-center-center';
+         
+	   /* 用户id */
 		var userId = ${user.id};
-		console.log(userId);
+	/* 	console.log(userId); */
 		
 		var valiFlag = true;
 		$(function() {
@@ -368,12 +384,18 @@ margin-left:30px;
 				type : "POST",
 				data : $(".editForm").serialize(),
 				success : function(result) {
-					alert(result.msg);
-					//1.更新成功关闭修改模态框
-					/* $("#editUserModal").modal('hide'); */
+					/* alert(result.msg); */
+					if(result.code == 100){
+						//更新成功 弹出提示信息
+						toastr.warning(result.msg);
+						getUser(userId);
+						window.parent.frames["topFrame"].location.reload(); //成功修改后刷新顶部，让用户图片也刷新
 					
-					getUser(userId);
-					window.parent.frames["topFrame"].location.reload(); //成功修改后刷新顶部，让用户图片也刷新
+					}else if(result.code == 200){
+						toastr.warning(result.msg);
+					}
+					
+					
 				}
 			})
 

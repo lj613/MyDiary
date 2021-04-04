@@ -190,6 +190,11 @@ public class UserController {
 	 public Msg edit( User  user,HttpServletRequest request,@PathVariable("id") Integer id) {
 		 //System.out.println("将要更新的用户数据："+ user);
 		userService.edit(user);
+	
+		if(	userService.edit(user)<0) {
+			return Msg.fail();
+		}
+		
 		System.out.println("编辑用户的id:"+id);
 		Object userType =  request.getSession().getAttribute("userType"); 
 		if("2".equals(userType.toString())) {
@@ -227,8 +232,8 @@ public class UserController {
 		}
 	 }else {
 		 Integer id = Integer.parseInt(ids);
-		/* System.out.println("删除管理员" + id); */
-		 if( userService.deleteById(id)<=0) {
+		/* System.out.println("删除管理员" + id);  */
+		 if(userService.deleteById(id)<=0) {
 			 System.out.println("删除用户失败");
 			  return Msg.fail(); 
 		  }

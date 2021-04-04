@@ -34,7 +34,7 @@
   	             and userId = #{userId}
   	         </if>
   	          <if test="releaseDateStr != null and releaseDateStr != '' ">
-  	             and date_format(releaseDate,'%Y年%m月')= #{releaseDateStr}
+  	              and date_format(releaseDate,'%Y-%m-%d') =  date_format(#{releaseDateStr},'%Y-%m-%d') 
   	         </if>
   	     </where>
   	     order by releaseDate desc
@@ -56,7 +56,8 @@
   	             and userId = #{userId}
   	         </if>
   	          <if test="releaseDateStr != null and releaseDateStr != '' ">
-  	             and date_format(releaseDate,'%Y年%m月')= #{releaseDateStr}
+  	            and date_format(releaseDate,'%Y年%m月') = #{releaseDateStr} 
+  	       
   	         </if>
   	     </where>
   	</select>

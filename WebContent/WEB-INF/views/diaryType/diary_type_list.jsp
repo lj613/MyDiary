@@ -23,6 +23,8 @@
 <link rel="stylesheet" type="text/css" href="../static/css/easyui.css">
 <link rel="stylesheet" type="text/css" href="../static/css/icon.css">
 <link rel="stylesheet" type="text/css" href="../static/css/demo.css">
+<!-- 确认取消弹出框 -->
+<script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
 <script type="text/javascript" src="../static/js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../static/js/validateExtends.js"></script>
 
@@ -44,6 +46,16 @@
 .form-control-feedback {
 	right: 16px;
 }
+
+/* 去掉button的边框 */
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;          
+} 
 </style>
 </head>
 
@@ -85,7 +97,8 @@
 			</table>
 		</div>
 	</div>
-	</section> <!-- 添加日记类型模态框 -->
+	</section> 
+	<!-- 添加日记类型模态框 -->
 	<div class="modal fade" id="addDiaryTypeModal"
 		aria-labelledby="addDiaryType" aria-hidden="true">
 		<div class="modal-dialog ">
@@ -335,7 +348,6 @@
 
 		//改变弹出模态框的index 避免模态框被另一个模态框覆盖
 		function changeIndex(obj) {
-
 			var k = obj.getAttribute("data-target");
 			$(k).css("z-index", index);
 			index++;
@@ -344,7 +356,7 @@
 
 		//点击添加弹出新增模态框  手动打开模态框
 		$("#diarytype_add_btn").click(function() {
-			changeIndex(this);
+			/* changeIndex(this); */
 			//清空表单数据(表单完整重置(表单数据，表单样式))  jquery没有这个方法 所以取dom 对象
 			reset_form("#addDiaryTypeModal .addForm");
 			$("#addDiaryTypeModal").modal({
@@ -416,7 +428,7 @@
 		//提交新增日记类别模态框的信息 保存日记类别信息
 		$("#diarytype_save_btn").click(
 				function() {
-					alert("点击了保存按钮");
+					/* alert("点击了保存按钮"); */
 					//校验不通过则不执行ajax请求
 					if (!valiFlag) {
 						show_validate_msg("#typename_add_input", "error",
@@ -426,15 +438,17 @@
 					//2.发送ajax请求保存用户  
 					//序列表格内容为字符串
 					//alert($("#addDiaryTypeModal .addForm").serialize());
-					$
-							.ajax({
+					$.ajax({
 								url : "${APP_PATH}/diaryType/add",
 								type : "POST",
 								data : $("#addDiaryTypeModal .addForm")
 										.serialize(), //提交序列化表格内容为字符串后的数据
 								success : function(result) {
 									if (result.code == 100) {
-										alert(result.msg);
+										/* alert(result.msg); */
+										swal(result.msg, {
+				                            icon: "success",
+				                        });
 										//1.关闭添加数据模态框
 										$("#addDiaryTypeModal").modal('hide');
 										//2.跳转到日记类别数据表格的最后一页 显示刚添加的数据
@@ -447,7 +461,12 @@
 													"#typename_add_input",
 													"error",
 													result.datalist.error_msg);
+										}else{
+											swal(result.msg, {
+					                            icon: "warning",
+					                        });
 										}
+										
 									}
 								}
 							});
@@ -460,7 +479,40 @@
 			var typeName = $(this).parents("tr").find("td:eq(2)").text(); //要删除的日记类别名称的名字
 			var id = $(this).attr("del-id");
 			/* alert($(this).parents("tr").find("td:eq(2)").text()); */
-			if (confirm("确认删除【" + typeName + "】吗？")) {
+			/* 确认删除弹出框 */
+			 swal({
+                   title: "确认删除【" + typeName + "】日记类别吗？",
+                   text: "一旦删除，您将无法恢复！",
+                   icon: "warning",
+                   buttons: true,
+                   dangerMode: true,
+               }).then((willDelete) => {
+                   if (willDelete) {
+                   	$.ajax({
+                   		url : "${APP_PATH}/diaryType/delete/" + id,
+							type : "POST",
+							success : function(result) {
+								/* alert(result.msg); */
+								if (result.code == 100) {
+									swal(result.msg, {
+			                            icon: "success",
+			                        });
+					        	} else if (result.code == 200) {							
+							        swal(result.msg, {
+	                                    icon: "warning",
+	                                });
+					         	}	
+							}
+						})
+                   } else {
+                       swal("你取消了此操作！");
+                   }
+                    //回到当前页面
+					to_page(currentPage);
+                   
+               });
+			
+			/* if (confirm("确认删除【" + typeName + "】吗？")) {
 				//确认，发送ajax请求删除
 				$.ajax({
 					url : "${APP_PATH}/diaryType/delete/" + id,
@@ -477,7 +529,7 @@
 
 					}
 				});
-			}
+			} */
 		});
 
 		//实现全选，全不选功能
@@ -511,7 +563,46 @@
 					});
 					//去除最后一个“-”符号
 					del_idstr = del_idstr.substring(0, del_idstr.length - 1);
-					if (confirm("确认删除所有选中的日记类别吗？")) {
+					 /*  当选择的要删除的数据为空，给出提示 */
+					if(del_idstr.length <= 0){
+						swal("请选择要删除的数据", {
+                            icon: "warning",
+                        });
+						return ;
+					}
+					/* 确认删除弹出框 */
+					 swal({
+		                    title: "确认删除所有选中的日记类别吗？",
+		                    text: "一旦删除，您将无法恢复！",
+		                    icon: "warning",
+		                    buttons: true,
+		                    dangerMode: true,
+		                   
+		                }).then(function(willDelete){
+		                    if (willDelete) {
+		                    	$.ajax({
+		                    		url : "${APP_PATH}/diaryType/delete/" + del_idstr,
+									type : "POST",
+									success : function(result) {
+										/* alert(result.msg); */
+										if(result.code == 100){
+											swal(result.msg, {
+					                            icon: "success",
+					                        });
+										}else if(result.code == 200){
+											swal(result.msg, {
+					                            icon: "warning",
+					                        });
+										}
+										//回到当前页面
+										to_page(currentPage);
+									}
+								})
+		                    } else {
+		                        swal("你取消了此操作！");
+		                    }
+		                });
+					/* if (confirm("确认删除所有选中的日记类别吗？")) {
 						//发送ajax请求删除所有选中的日记类别
 						$.ajax({
 							url : "${APP_PATH}/diaryType/delete/" + del_idstr,
@@ -522,7 +613,7 @@
 								to_page(currentPage);
 							}
 						})
-					}
+					} */
 				});
 
 		//给修改按钮绑定修改模态框弹出事件
@@ -530,7 +621,7 @@
 				"click",
 				".edit_btn",
 				function() {
-					changeIndex(this);
+				/* 	changeIndex(this); */
 					//alert("edit");
 					//1.查出并显示对应日记类别信息
 					getDiaryType($(this).attr("edit-id"));
@@ -558,12 +649,12 @@
 		}
 		//点击更新 更新日记类别信息
 		$('#diaryType_update_btn').click(function() {
-			alert("点击了更新按钮");
+			/* alert("点击了更新按钮"); */
 			if (!valiFlag) {
 				alert("校验不通过");
 				return false;
 			}
-			alert($("#editDiaryTypeModal .editForm").serialize());
+			/* alert($("#editDiaryTypeModal .editForm").serialize()); */
 			//发送ajax请求  保存更新的管理员数据
 			$.ajax({
 				url : "${APP_PATH}/diaryType/edit/" + $(this).attr("edit-id"),
@@ -571,10 +662,20 @@
 				data : $("#editDiaryTypeModal .editForm").serialize(),
 				success : function(result) {
 					//alert(result.msg);
+					if(result.code == 100){
+						swal(result.msg, {
+                            icon: "success",
+                        });
+					}else if(result.code == 200){
+						swal(result.msg, {
+                            icon: "warning",
+                        });
+						
+					}
 					//1.更新成功关闭修改模态框
 					$("#editDiaryTypeModal").modal('hide');
 					//2.跳转到修改的数据所在的页面
-					alert("currentPage:" + currentPage);
+				/* 	alert("currentPage:" + currentPage); */
 					to_page(currentPage);
 				}
 			})

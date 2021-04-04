@@ -23,6 +23,8 @@
 <link rel="stylesheet" type="text/css" href="../static/css/demo.css">
 
 <script type="text/javascript" src="../static/ueditor/ueditor.config.js"></script>
+<!-- 确认取消弹出框 -->
+<script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
 <script type="text/javascript"
 	src="../static/ueditor/ueditor.all.min.js"></script>
 
@@ -65,6 +67,16 @@
 .save_container{
   margin-top:20px;
 }
+
+/* 去掉button的边框 */
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;          
+} 
 </style>
 </head>
 <body>
@@ -199,13 +211,16 @@
 		//提交修改日记的信息 保存日记信息
 		$("#diary_save_btn").click(
 				function() {
-					alert("点击了完成修改日记按钮");
+					/* alert("点击了完成修改日记按钮"); */
 					var diaryType = $("#diaryType option:selected").val();
 					//alert("日记类型："+diaryType);
 					var title = $("#title_edit_input").val();
 					if(title == null || title == ""){
 						valiFlag = false;
-						alert('日记标题不能为空');
+						/* alert('日记标题不能为空'); */
+						swal("日记标题不能为空", {
+                            icon: "warning",
+                        });
 						return false;
 					}else if(!diaryType){
 						valiFlag = false;
@@ -213,13 +228,16 @@
 						return false;
 					}else if (!UE.getEditor('editor').hasContents()){
 						valiFlag = false;
-						alert('请先填写日记内容!');
+						/* alert('请先填写日记内容!'); */
+						swal("请先填写日记内容!", {
+                            icon: "warning",
+                        });
 						return false;
 					}else{
 						valiFlag = true;
 					}
 					if(!valiFlag){
-						alert("校验不通过")
+						/* alert("校验不通过") */
 					    return false;
 				    } 
 					var diaryContent = UE.getEditor('editor').getContent();
@@ -235,13 +253,20 @@
 						 data : $("#edit_diary_form").serialize(),
 						 success:function(result){
 							 if(result.code == 100){
+								  swal(result.msg + "!", {
+			                            icon: "success",
+		                         });
 								 reset_form("#edit_diary_form");
 								 //成功添加日记后将富文本编辑器中的内容清空·
 								 //UE.getEditor('editor').setContent('', false);//清空内容
-								 alert(result.msg);
+								/*  alert(result.msg); */
+								//日记修改成功后返回到日记列表页面
 								 window.location.href ="<%=request.getContextPath()%>/diary/list"
 							 }else if(result.code == 200){
-								 alert(result.msg);
+								 /* alert(result.msg); */
+								 swal(result.msg + "!", {
+			                            icon: "warning",
+		                         });
 							    
 							 }
 						 }

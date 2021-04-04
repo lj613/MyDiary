@@ -78,6 +78,15 @@
 .back {
 	margin-top: 10px;
 }
+/* 去掉button的边框 */
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;          
+} 
 </style>
 </head>
 <body>

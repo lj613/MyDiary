@@ -115,7 +115,7 @@ a, a:hover, a:focus {
 	<div id="menu">
 		<div class="panel-group" id="panelContainer">
 			<div class="panel panel-default">
-				<div id="header1" class="panel-heading" data-toggle="collapse"
+				<div id="header0" class="panel-heading" data-toggle="collapse"
 					data-target="#sub0" data-parent="#panelContainer">
 					<!-- <i class="glyphicon glyphicon-list-alt"></i> <a href="#">后台首页</a>  -->
 					<!-- <span class="iconfont icon-user"></span> -->
@@ -198,7 +198,7 @@ a, a:hover, a:focus {
 			
 			<c:if test="${userType == 1 }">
 			<div class="panel panel-default">
-				<div id="header3" class="panel-heading" data-toggle="collapse"
+				<div id="header4" class="panel-heading" data-toggle="collapse"
 					data-target="#sub4" data-parent="#panelContainer">
 					<i class="iconfont icon-category"></i> <a href="#">日记类别管理</a> <span
 						class="iconfont icon-arrow-right pull-right"></span>
@@ -213,7 +213,7 @@ a, a:hover, a:focus {
 			</div>
             </c:if>
 			<div class="panel panel-default">
-				<div id="header2" class="panel-heading" data-toggle="collapse"
+				<div id="header5" class="panel-heading" data-toggle="collapse"
 					data-target="#sub5" data-parent="#panelContainer">
 					<!-- <i class="glyphicon glyphicon-leaf"></i>  -->
 					<i class="iconfont icon-settings"></i> <a href="#">系统管理</a> <span

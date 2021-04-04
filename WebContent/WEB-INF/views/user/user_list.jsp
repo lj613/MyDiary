@@ -24,6 +24,8 @@
 <link rel="stylesheet" type="text/css" href="../static/css/icon.css">
 <link rel="stylesheet" type="text/css" href="../static/css/demo.css">
 <!-- <script type="text/javascript" src="../static/js/jquery.min.js"></script> -->
+<!-- 确认取消弹出框 -->
+<script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
 <script type="text/javascript" src="../static/js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../static/js/validateExtends.js"></script>
 
@@ -47,6 +49,20 @@ html {
 	display: table-cell;
 	vertical-align: middle;
 }
+#search_btn {
+	height: 40px;
+}
+
+/* 去掉button的边框 */
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;          
+} 
+
 </style>
 </head>
 
@@ -233,7 +249,7 @@ html {
 							</div>
 						</form>
 						<form class="form-horizontal addForm">
-							<!--  隐藏域  在页面存储但不需要显示出来的值 -->
+							<!--  隐藏域  在页面存储但不需要显示出来的值   type="hidden"-->
 							<div class="form-group">
 								<input id="add_photo" type="hidden" name="photo"
 									value="/MyDiary/photo/user.jpg" />
@@ -504,9 +520,11 @@ html {
 
 		//点击添加弹出新增模态框  手动打开模态框
 		$("#user_add_btn").click(function() {
-			changeIndex(this);
+			/* changeIndex(this); */
 			//清空表单数据(表单完整重置(表单数据，表单样式))  jquery没有这个方法 所以取dom 对象
 			reset_form("#addUserModal .addForm");
+			
+			$("#edit-upload-photo").val("");
 			$("#addUserModal").modal({
 				backdrop : "static" //设置点击背景空白处模态框不被关闭
 			})
@@ -675,7 +693,7 @@ html {
 		//提交新增用户模态框的信息 保存用户信息
 		$("#user_save_btn").click(
 				function() {
-					alert("点击了保存按钮");
+				/* 	alert("点击了保存按钮"); */
 					//1.将新增用户模态框中的数据提交给服务器进行保存
 					//校验要提交的数据 input输入框失去焦点触发校验
 					/* if(!validate_add_form()){
@@ -698,6 +716,10 @@ html {
 							if (result.code == 100) {
 								//用户数据保存成功
 								//alert(result.msg);
+								//提示添加用户操作成功
+								swal("添加用户成功", {
+			                            icon: "success",
+			                        });
 								//1.关闭添加数据模态框
 								$("#addUserModal").modal('hide');
 								//2.跳转到用户数据表格的最后一页 显示刚添加的数据
@@ -725,7 +747,43 @@ html {
 			var username = $(this).parents("tr").find("td:eq(2)").text(); //要删除的管理员的名字
 			var id = $(this).attr("del-id");
 			/* alert($(this).parents("tr").find("td:eq(2)").text()); */
-			if (confirm("确认删除【" + username + "】吗？")) {
+			
+			/* 确认删除弹出框 */
+			 swal({
+                   title: "确认删除【" + username + "】用户吗？",
+                   text: "一旦删除，您将无法恢复！",
+                   icon: "warning",
+                   buttons: true,
+                   dangerMode: true,
+               }).then(function(willDelete){
+                   if (willDelete) {
+                   	$.ajax({
+                   		url : "${APP_PATH}/user/delete/" + id,
+							type : "POST",
+							success : function(result) {
+								/* alert(result.msg); */
+								if (result.code == 100) {
+									swal(result.msg, {
+			                            icon: "success",
+			                        });
+									to_page(currentPage);
+						        } else if (result.code == 200) {
+							
+							      swal(result.msg, {
+	                                 icon: "warning",
+	                              });
+							  	to_page(currentPage);
+						       }
+							}
+						})
+                   } else {
+                       swal("你取消了此操作！");
+                   }
+                    //回到当前页面
+					to_page(currentPage);
+                   
+               });
+			/* if (confirm("确认删除【" + username + "】吗？")) {
 				//确认，发送ajax请求删除
 				$.ajax({
 					url : "${APP_PATH}/user/delete/" + id,
@@ -742,8 +800,7 @@ html {
 
 					}
 				});
-			}
-
+			} */
 		});
 
 		//实现全选，全不选功能
@@ -775,7 +832,48 @@ html {
 					});
 					//去除最后一个“-”符号
 					del_idstr = del_idstr.substring(0, del_idstr.length - 1);
-					if (confirm("确认删除所有选中的用户吗？")) {
+					 /*  当选择的要删除的数据为空，给出提示 */
+					if(del_idstr.length <= 0){
+						swal("请选择要删除的数据", {
+                            icon: "warning",
+                        });
+						return ;
+					}
+					/* 确认删除弹出框 */
+					 swal({
+		                    title: "确认删除所有选中的用户吗？",
+		                    text: "一旦删除，您将无法恢复！",
+		                    icon: "warning",
+		                    buttons: true,
+		                    dangerMode: true,
+		                   
+		                }).then(function(willDelete){
+		                    if (willDelete) {
+		                    	$.ajax({
+		                    		url : "${APP_PATH}/user/delete/" + del_idstr,
+									type : "POST",
+									success : function(result) {
+										/* alert(result.msg); */
+										if(result.code == 100){
+											swal(result.msg, {
+					                            icon: "success",
+					                        });
+										}else if(result.code == 200){
+											swal(result.msg, {
+					                            icon: "warning",
+					                        });
+										}
+										
+										//回到当前页面
+										to_page(currentPage);
+									}
+								})
+		                    } else {
+		                        swal("你取消了此操作！");
+		                    }
+		                });
+					 
+					/* if (confirm("确认删除所有选中的用户吗？")) {
 						//发送ajax请求删除所有选中的用户
 						$.ajax({
 							url : "${APP_PATH}/user/delete/" + del_idstr,
@@ -786,13 +884,13 @@ html {
 								to_page(currentPage);
 							}
 						})
-					}
+					} */
 				});
 
 		//给修改按钮绑定修改模态框弹出事件
 		$(document).on("click", ".edit_btn", function() {
-		    alert("点击了修改按钮");
-			changeIndex(this);
+		  /*   alert("点击了修改按钮"); */
+		/* 	changeIndex(this); */
 			/* reset_form("#editUserModal .editPhotoForm"); */
 			//alert("edit");
 			//1.查出并显示对应用户信息
@@ -861,17 +959,25 @@ html {
 							//发送ajax请求  保存更新的管理员数据
 							$.ajax({
 								/* url:"${APP_PATH}/admin/edit", */
-								url : "${APP_PATH}/user/edit/"
-										+ $(this).attr("edit-id"),
+								url : "${APP_PATH}/user/edit/"+ $(this).attr("edit-id"),
 								type : "POST",
-								data : $("#editUserModal .editForm")
-										.serialize(),
+								data : $("#editUserModal .editForm").serialize(),
 								success : function(result) {
 									//alert(result.msg);
+									if(result.code == 100){
+										swal(result.msg, {
+				                            icon: "success",
+				                        });
+										
+									}else if(result.code == 200){
+										swal(result.msg, {
+				                            icon: "warning",
+				                        });
+									}
 									//1.更新成功关闭修改模态框
 									$("#editUserModal").modal('hide');
 									//2.跳转到修改的数据所在的页面
-									alert("currentPage:"+ currentPage);
+									/* alert("currentPage:"+ currentPage); */
 									to_page(currentPage);
 								}
 							})

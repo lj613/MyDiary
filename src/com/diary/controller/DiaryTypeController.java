@@ -132,6 +132,9 @@ public class DiaryTypeController {
 	public Msg edit(DiaryType diaryType) {
 		System.out.println("将要更新的日记类别数据：" + diaryType);
 		diaryTypeService.edit(diaryType);
+		if(diaryTypeService.edit(diaryType)<=0) {
+			return Msg.fail();
+		}
 		return Msg.success();
 	}
 
