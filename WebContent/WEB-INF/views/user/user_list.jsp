@@ -12,6 +12,7 @@
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 
+
 <link rel="stylesheet" type="text/css"
 	href="../static/css/user/user_list.css">
 <link href="../static/css/bootstrap.min.css" rel="stylesheet">

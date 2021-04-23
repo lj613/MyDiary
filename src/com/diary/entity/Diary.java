@@ -3,7 +3,6 @@ package com.diary.entity;
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
-
 /**
  *    日记实体类
  * @author Lenovo

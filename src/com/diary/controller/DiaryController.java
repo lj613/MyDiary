@@ -44,6 +44,7 @@ public class DiaryController {
 	@Resource
 	private DiaryTypeService diaryTypeService;
 
+	
 	/**
 	 * 写日记页面
 	 * 
@@ -134,11 +135,29 @@ public class DiaryController {
 		// 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面
 		// 传入连续显示的页数5
 		PageInfo pageInfo = new PageInfo(diaryList, 5);
-
 		return Msg.success().add("pageInfo", pageInfo);
 
 	}
+<<<<<<< HEAD
 
+=======
+	@RequestMapping("/getList")
+	@ResponseBody
+	// @ResponseBody自动把返回的对象转换为json字符串 @ResponseBody使用需要jackson包
+	public Msg getList(HttpServletRequest request) {
+		Map<String, Object> map = new HashMap();
+		List<Diary> diaryList = new ArrayList();
+		User loginedUser = (User) request.getSession().getAttribute("user");
+		Long userId = loginedUser.getId();
+		System.out.println("hhh"+userId);
+		map.put("userId",userId);
+		diaryList = diaryService.findSD(map);
+		System.out.println("aaaaa"+diaryList);
+		  return Msg.success().add("diary",diaryList);
+
+	}
+	
+>>>>>>> branch 'master' of https://github.com/lj613/MyDiary.git
 	/**
 	 * 按标题查询日记
 	 * 
@@ -315,6 +334,7 @@ public class DiaryController {
 		} else {
 			Integer id = Integer.parseInt(ids);
 			/* System.out.println("删除管理员" + id); */
+<<<<<<< HEAD
 			if (diaryService.deleteById(id) <= 0) {
 				System.out.println("删除日记失败");
 				return Msg.fail();
@@ -373,6 +393,68 @@ public class DiaryController {
 		// 将日记各类别对应的数量保存在session中
 		request.getSession().setAttribute("diaryTypeData", diaryTypeData);
 
+=======
+			 if( diaryService.deleteById(id)<=0) {
+				 System.out.println("删除日记失败");
+				  return Msg.fail(); 
+			  }
+		 }
+	
+		 Map<String, Object> map = new HashMap();
+         if(userType == 2) {
+        	 //登陆用户为普通用户
+        	 User loginedUser = (User) request.getSession().getAttribute("user");
+    		 Long userId = loginedUser.getId();
+    		 map.put("userId",userId);
+    		//当前登陆用户所写的日记总数
+    		 Long diaryNum = diaryService.getTotalNum(map);
+    		 request.getSession().setAttribute("diaryNum", diaryNum);
+    		 //重新统计各日记类别的数量
+    		 staticDiaryTypeNum(userId,request);
+		 }else if(userType == 1) {
+			 //登陆用户为管理员
+			 //所有用户日记总数
+			 Long diaryTotalNum = diaryService.getTotalNum(map);
+			 request.getSession().setAttribute("diaryTotalNum",diaryTotalNum);
+		 }
+		 return Msg.success(); 
+	 }
+	 
+	 
+	 
+	 /**
+	  * 
+	  * 统计各日记类别数量
+	  */
+	 
+	 public void staticDiaryTypeNum(Long userId,HttpServletRequest request) {
+		   List<DiaryType> diaryTypeList = diaryTypeService.findList();
+		   System.out.println("日记类别列表："+diaryTypeList);
+		   Map<String, Object> DiaryTypeMap = new HashMap();
+		   List<Object> diaryTypeData = new ArrayList<Object>();
+		  
+		   for(int i=0;i<diaryTypeList.size();i++) {
+			   JSONObject DataNode  = new JSONObject();
+			   //获取日记类别id
+			   Long diaryTypeId = (long) diaryTypeList.get(i).getDiaryTypeId();
+			   //获取日记类别名称
+			   String typeName= diaryTypeList.get(i).getTypeName();
+			   DiaryTypeMap.put("userId",userId);
+			   DiaryTypeMap.put("typeId",diaryTypeId);
+			   //查询对应类别日记的数量
+			   Long diaryNum = diaryService.getTotalNum(DiaryTypeMap);
+			   DataNode.put("value",diaryNum);
+			   DataNode.put("name",typeName);
+			   //System.out.println(DataNode);
+			   //将创建的对象添加到结果数组中
+			   diaryTypeData.add(DataNode);
+			   
+		   }
+		   //System.out.println(diaryTypeData);
+		   //将日记各类别对应的数量保存在session中
+		   request.getSession().setAttribute("diaryTypeData", diaryTypeData);
+		 
+>>>>>>> branch 'master' of https://github.com/lj613/MyDiary.git
 		/*
 		 * Map<String, Object> DiaryTypeMap1 = new HashMap();
 		 * DiaryTypeMap1.put("userId",userId); DiaryTypeMap1.put("typeId",1); Long

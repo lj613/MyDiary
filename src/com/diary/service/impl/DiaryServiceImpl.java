@@ -17,7 +17,6 @@ public class DiaryServiceImpl implements DiaryService {
 
 	@Resource
 	private DiaryDao diaryDao;
-	
 	// @Override
 	/*
 	 * public DiaryType findByTypeName(String typeName) { // TODO Auto-generated
@@ -37,6 +36,10 @@ public class DiaryServiceImpl implements DiaryService {
 	@Override
 	public List<Diary> findList() {
 		return diaryDao.findList();
+	}
+	@Override
+	public List<Diary> findSD(Map<String,Object> map) {
+		return diaryDao.findSD(map);
 	}
 
 	//带参数查询日记列表

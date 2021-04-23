@@ -39,7 +39,6 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-
 	/**
 	 * 用户列表页
 	 * 
@@ -49,6 +48,11 @@ public class UserController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(ModelAndView model) {
 		model.setViewName("user/user_list");
+		return model;
+	}
+	@RequestMapping(value = "/user_list1", method = RequestMethod.GET)
+	public ModelAndView user_list(ModelAndView model) {
+		model.setViewName("user/user_list1");
 		return model;
 	}
 	
@@ -277,8 +281,11 @@ public class UserController {
 			return Msg.fail().add("errMsg", "文件格式不正确，请上传jpg,png,gif,jpeg格式的图片！");
 		}
 		String savePath = request.getServletContext().getRealPath("/") + "\\upload\\";
-//		System.out.println("图片上传到的根路径"+request.getServletContext().getRealPath("/"));
-//		System.out.println("图片保存的位置"+savePath);
+
+		System.out.println("图片上传到的根路径"+request.getServletContext().getRealPath("/"));
+		System.out.println("图片保存的位置"+savePath);
+		request.getSession().setAttribute("url", savePath);
+
 
 		File savePathFile = new File(savePath);
 		if (!savePathFile.exists()) {

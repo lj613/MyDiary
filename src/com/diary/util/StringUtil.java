@@ -9,7 +9,6 @@ import java.util.List;
  *
  */
 public class StringUtil {
-	
 	/**
 	 * 将给定的list按照指定的分隔符分割成字符串返回
 	 * @param list
@@ -58,6 +57,12 @@ public class StringUtil {
 		if(str != null && !"".equals(str.trim())) {
 			return true;
 		}
+		return false;
+	}
+
+
+	public static boolean isEmpty(String str) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 }

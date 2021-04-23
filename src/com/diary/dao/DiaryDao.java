@@ -17,13 +17,12 @@ public interface DiaryDao {
 	//无参数查找所有日记
 	public List<Diary> findList();
 	
+	public List<Diary> findSD(Map<String,Object> map);
 	//带参数查询日记列表
 	public List<Diary> list(Map<String,Object> map);
 	
 	//带参数查询日记数量
 	public Long getTotalNum(Map<String,Object> map); 
-	
-	
 	
 	//根据id查询日记
 	public Diary findById(Integer id);

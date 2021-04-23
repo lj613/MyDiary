@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -166,7 +165,7 @@ a, a:hover, a:focus {
 										class="iconfont icon-list"></span>用户列表</a></li>
 							</c:if>
 							<c:if test="${userType == 2 }">
-							<li><a href="../user/personal" target="body"><span
+							<li><a href="../user/user_list1" target="body"><span
 										class="iconfont icon-list"></span>个人中心</a></li>
 							</c:if>
 						</ul>

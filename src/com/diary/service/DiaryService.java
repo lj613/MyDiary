@@ -18,6 +18,7 @@ public interface DiaryService {
 	//无参数查找所有日记
 	public List<Diary> findList();
 	
+	public List<Diary> findSD(Map<String,Object> map);
 	//带参数查询日记列表
 	public List<Diary> list(Map<String,Object> map);
 	
@@ -39,7 +40,5 @@ public interface DiaryService {
 	
 	//批量删除日记
 	public int deleteAll(String ids);
-	
-	
 
 }

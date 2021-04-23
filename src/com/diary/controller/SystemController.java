@@ -43,6 +43,7 @@ import net.sf.json.JSONObject;
 @Controller
 public class SystemController {
 
+	
 	@Autowired
 	private AdminService adminService;
 	@Autowired
@@ -410,7 +411,7 @@ public class SystemController {
 		   for(int i=0;i<diaryTypeList.size();i++) {
 			   JSONObject DataNode  = new JSONObject();
 			   //获取日记类别id
-			   Long diaryTypeId = diaryTypeList.get(i).getDiaryTypeId();
+			   Long diaryTypeId = (long) diaryTypeList.get(i).getDiaryTypeId();
 			   //获取日记类别名称
 			   String typeName= diaryTypeList.get(i).getTypeName();
 			   DiaryTypeMap.put("userId",userId);

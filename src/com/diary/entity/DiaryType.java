@@ -1,12 +1,22 @@
 package com.diary.entity;
 
 public class DiaryType {
-	private Long diaryTypeId;
+	private int diaryTypeId;
 	private String typeName;
-	public Long getDiaryTypeId() {
+	private int diaryCount;
+	
+	
+	public DiaryType() {
+		super();
+	}
+	public DiaryType(String typeName) {
+		super();
+		this.typeName = typeName;
+	}
+	public int getDiaryTypeId() {
 		return diaryTypeId;
 	}
-	public void setDiaryTypeId(Long diaryTypeId) {
+	public void setDiaryTypeId(int diaryTypeId) {
 		this.diaryTypeId = diaryTypeId;
 	}
 	public String getTypeName() {
@@ -15,10 +25,10 @@ public class DiaryType {
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
 	}
-	
-	public String toString() {
-		return "DiaryType[diaryTypeId="+ diaryTypeId +",typeName="+ typeName +"]";
+	public int getDiaryCount() {
+		return diaryCount;
 	}
-      
-
+	public void setDiaryCount(int diaryCount) {
+		this.diaryCount = diaryCount;
+	}
 }
