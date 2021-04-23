@@ -77,7 +77,7 @@
 
 				<button type="button" class="btn btn-danger" data-toggle="modal"
 					id="diaryType_delete_all_btn">
-					<span class="glyphicon glyphicon-remove"></span> 删除
+					<span class="glyphicon glyphicon-remove"></span> 批量删除
 				</button>
 			</div>
 		</div>

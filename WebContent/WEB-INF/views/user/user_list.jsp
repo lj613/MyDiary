@@ -85,7 +85,7 @@ html {
 
 					<button type="button" class="btn btn-danger" data-toggle="modal"
 						id="user_delete_all_btn">
-						<span class="glyphicon glyphicon-remove"></span> 删除
+						<span class="glyphicon glyphicon-remove"></span> 批量删除
 					</button>
 				</div>
 			</c:if>
@@ -105,10 +105,10 @@ html {
 						<th width="80">ID</th>
 						<th width="120">用户名</th>
 						<th width="110">用户头像</th>
-						<th width="150">用户编号</th>
+						<th width="180">用户编号</th>
 						<th width="100">密码</th>
 						<th width="80">性别</th>
-						<th style="max-width: 250px, width:250px">个性签名</th>
+						<th style="max-width: 400px, width:400px">个性签名</th>
 						<th style="min-width: 190px">操作</th>
 					</tr>
 				</thead>
@@ -374,7 +374,7 @@ html {
 										user.password);
 								var sexTd = $("<td></td>").append(
 										user.sex);
-								var signatureTd = $("<td style='max-width:300px;width:250px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'></td>").append(
+								var signatureTd = $("<td style='max-width:400px;width:400px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'></td>").append(
 										user.signature);
 								var editBtn = $("<button></button>")
 										.addClass(

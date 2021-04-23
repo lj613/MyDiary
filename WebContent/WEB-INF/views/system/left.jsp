@@ -137,7 +137,7 @@ a, a:hover, a:focus {
 					<div id="header1" class="panel-heading" data-toggle="collapse"
 						data-target="#sub1" data-parent="#panelContainer">
 						<!-- <i class="glyphicon glyphicon-list-alt"></i>  -->
-						<i class="iconfont icon-admin"></i> <a href="#">管理员中心</a> <span
+						<i class="iconfont icon-admin"></i> <a href="#">管理员管理</a> <span
 							class="iconfont icon-arrow-right pull-right"></span>
 					</div>
 					<div id="sub1" class="collapse panel-collapse">
@@ -183,14 +183,13 @@ a, a:hover, a:focus {
 					<div class="panel-body">
 						<ul class="nav">
 							<li><a href="../diary/list" target="body"><span class="iconfont icon-list"></span> 日记列表</a></li>
-							<li><a href="#">添加栏目3</a></li>
 							<c:if test="${userType == 2 }">
 							     <li><a href="../diary/w_diary" target="body"><span class="iconfont icon-write"></span> 写日记</a></li>
 							</c:if>
 						    <!--  
 							<li><a href="../diaryType/list" target="body"><span class="iconfont icon-category"></span>日记类型</a></li>
 						     -->
-							<li><a href="#">添加栏目4</a></li>
+							
 						</ul>
 					</div>
 				</div>
@@ -200,7 +199,7 @@ a, a:hover, a:focus {
 			<div class="panel panel-default">
 				<div id="header4" class="panel-heading" data-toggle="collapse"
 					data-target="#sub4" data-parent="#panelContainer">
-					<i class="iconfont icon-category"></i> <a href="#">日记类别管理</a> <span
+					<i class="iconfont icon-category"></i> <a href="#">日记类型管理</a> <span
 						class="iconfont icon-arrow-right pull-right"></span>
 				</div>
 				<div id="sub4" class="collapse panel-collapse">

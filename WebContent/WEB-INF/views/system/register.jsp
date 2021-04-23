@@ -41,6 +41,7 @@ body, html {
 
 body {
 	background: url("../static/images/register.jpg");
+	background-size:1500px 900px;
 }
 
 /* 登陆框 */

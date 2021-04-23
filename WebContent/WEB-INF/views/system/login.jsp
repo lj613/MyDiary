@@ -41,6 +41,7 @@ body, html {
 
 body {
 	background: url("../static/images/login_bg.png");
+	background-size:1500px 900px;
 }
 
 /* 登陆框 */
@@ -203,7 +204,7 @@ body {
 <body>
 	<div class="container">
 		<div class="login-wrap">
-			<h2 class="title">系统登陆</h2>
+			<h2 class="title">网络日记本系统登陆</h2>
 			<!-- 表单部分 -->
 			<form id="form">
 				<!-- 输入框部分 -->
